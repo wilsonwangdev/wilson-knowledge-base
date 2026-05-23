@@ -102,6 +102,7 @@ export default (() => {
           src="/_vercel/insights/script.js"
           data-sdkn="@vercel/analytics"
           data-sdkv="1.5.0"
+          onerror="this.remove()"
         ></script>
       </head>
     )
