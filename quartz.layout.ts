@@ -43,9 +43,9 @@ export const defaultContentPageLayout: PageLayout = {
         // Folders before files
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
-        // Both folders: alphabetical
+        // Both folders: reverse chronological (newest first)
         if (a.isFolder && b.isFolder) {
-          return a.displayName.localeCompare(b.displayName, undefined, {
+          return b.displayName.localeCompare(a.displayName, undefined, {
             numeric: true,
             sensitivity: "base",
           })
@@ -88,8 +88,9 @@ export const defaultListPageLayout: PageLayout = {
       sortFn: (a, b) => {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
+        // Both folders: reverse chronological (newest first)
         if (a.isFolder && b.isFolder) {
-          return a.displayName.localeCompare(b.displayName, undefined, {
+          return b.displayName.localeCompare(a.displayName, undefined, {
             numeric: true,
             sensitivity: "base",
           })
