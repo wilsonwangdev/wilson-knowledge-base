@@ -1,6 +1,6 @@
 ---
 title: "Cloudflare CLI 设计"
-date: 2026-04-14
+date: 2026-04-14T09:00:00
 tags: [cli, cloudflare, developer-tools]
 
 ---

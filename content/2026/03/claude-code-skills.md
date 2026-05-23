@@ -1,6 +1,6 @@
 ---
 title: "构建 Claude Code 的经验：我们如何使用 Skills【译】"
-date: 2026-03-19
+date: 2026-03-19T09:00:00
 tags: [claude-code, ai-agent, skills, anthropic, developer-tools, translation]
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Rendering as a Protocol — UI 应被描述而非被执行"
-date: 2026-04-14
+date: 2026-04-14T10:00:00
 tags: [rendering, protocol, frontend, architecture]
 
 ---

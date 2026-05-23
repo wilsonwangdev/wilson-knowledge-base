@@ -1,6 +1,6 @@
 ---
 title: "工程技术：在智能体优先的世界中利用 Codex"
-date: 2026-03-08
+date: 2026-03-08T10:00:00
 tags: [agent-engineering, codex, harness-engineering, agent-first-development, ai-coding, openai]
 ---
 

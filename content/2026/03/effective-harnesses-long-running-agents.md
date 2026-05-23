@@ -1,6 +1,6 @@
 ---
 title: "Effective Harnesses for Long-Running Agents"
-date: 2026-03-08
+date: 2026-03-08T09:00:00
 tags: [agent-engineering, long-running-agents, context-management, claude-agent-sdk, anthropic]
 ---
 

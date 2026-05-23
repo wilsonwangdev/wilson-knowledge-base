@@ -1,6 +1,6 @@
 ---
 title: "Next.js Discord 知识索引到 Web"
-date: 2026-03-17
+date: 2026-03-17T10:00:00
 tags: [nextjs, discord, knowledge-base, open-source, developer-community]
 ---
 
