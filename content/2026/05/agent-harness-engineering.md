@@ -4,8 +4,6 @@ date: 2026-05-10T09:00:00
 tags: [agent, harness, engineering]
 ---
 
-# Agent Harness Engineering — 代理的"脚手架工程学"
-
 ## 一句话总结
 
 **Agent = Model + Harness。** 模型只是代理系统的一个输入，真正决定代理能否完成任务的，是包裹在模型外围的整个"马具"——提示词、工具、沙箱、钩子、子代理、反馈回路。中等模型+优秀harness，长期碾压优秀模型+糟糕harness。
