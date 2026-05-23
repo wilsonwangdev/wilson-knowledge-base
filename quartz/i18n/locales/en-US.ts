@@ -59,6 +59,10 @@ export default {
     contentMeta: {
       readingTime: ({ minutes }) => `${minutes} min read`,
     },
+    prevNext: {
+      prev: "Previous",
+      next: "Next",
+    },
   },
   pages: {
     rss: {

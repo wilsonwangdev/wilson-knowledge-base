@@ -16,3 +16,61 @@
     }
   }
 }
+
+// ===== Mobile / H5 improvements =====
+@media (max-width: 768px) {
+  // Hide graph on mobile (canvas-based, unusable on small screens)
+  .graph {
+    display: none !important;
+  }
+
+  // Top nav: compact header with less padding
+  .page-header {
+    padding: 0.5rem 1rem;
+  }
+
+  // Search bar: full width on mobile
+  .search {
+    width: 100%;
+
+    & > #search-icon {
+      left: 12px;
+    }
+
+    & > #search-container > #search-space {
+      padding-left: 2.2rem;
+      font-size: 0.95rem;
+      height: 2.4rem;
+    }
+  }
+
+  // Breadcrumbs: smaller, less margin
+  .breadcrumb-container {
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  // Article title: smaller on mobile
+  .article-title {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  // Content area: less padding
+  .center {
+    padding: 0 1rem;
+  }
+}
+
+// Extra small screens
+@media (max-width: 480px) {
+  .page-header {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .article-title {
+    font-size: 1.15rem;
+  }
+}
