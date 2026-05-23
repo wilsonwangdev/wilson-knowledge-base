@@ -1,0 +1,25 @@
+# Dead link checker config (lychee)
+# Docs: https://lychee.cli.rs/
+
+verbose = "info"
+no_progress = true
+
+cache = true
+max_cache_age = "7d"
+cache_exclude_status = "500.."
+
+timeout = 30
+retry_wait_time = 5
+max_retries = 2
+accept = ["200..=204", "206", "429"]
+
+exclude = [
+  '^https?://(api\\.)?example\\.(com|org|net)(:\\d+)?(/|$)',
+  '^https?://localhost(:\\d+)?(/|$)',
+  '^https?://127\\.0\\.0\\.1',
+  '^mailto:',
+]
+
+exclude_path = ["node_modules", "public", ".quartz-cache"]
+exclude_all_private = true
+include_mail = false

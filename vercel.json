@@ -2,5 +2,6 @@
   "buildCommand": "npx quartz build",
   "outputDirectory": "public",
   "installCommand": "npm install",
-  "framework": null
+  "framework": null,
+  "cleanUrls": true
 }

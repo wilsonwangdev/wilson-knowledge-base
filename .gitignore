@@ -18,3 +18,4 @@ public/
 .env
 .env.local
 quartz-temp/
+.vercel
