@@ -102,10 +102,9 @@
 
   // Left sidebar: compact layout, but DON'T clip the Explorer overlay
   .sidebar.left {
-    // Allow Explorer hamburger to have its own space
+    // Explorer: ensure hamburger is visible and clickable
     .explorer {
       flex-shrink: 0;
-      margin-left: auto;
     }
 
     // Prevent search/darkmode/reader flex from wrapping text
