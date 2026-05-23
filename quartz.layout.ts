@@ -51,8 +51,8 @@ export const defaultContentPageLayout: PageLayout = {
           })
         }
         // Both files: sort by date, newest first
-        const aDate = a.data?.date?.getTime() ?? 0
-        const bDate = b.data?.date?.getTime() ?? 0
+        const aDate = a.data?.date ? new Date(a.data.date).getTime() : 0
+        const bDate = b.data?.date ? new Date(b.data.date).getTime() : 0
         if (bDate !== aDate) return bDate - aDate
         // Fallback: alphabetical
         return a.displayName.localeCompare(b.displayName, undefined, {
@@ -94,8 +94,8 @@ export const defaultListPageLayout: PageLayout = {
             sensitivity: "base",
           })
         }
-        const aDate = a.data?.date?.getTime() ?? 0
-        const bDate = b.data?.date?.getTime() ?? 0
+        const aDate = a.data?.date ? new Date(a.data.date).getTime() : 0
+        const bDate = b.data?.date ? new Date(b.data.date).getTime() : 0
         if (bDate !== aDate) return bDate - aDate
         return a.displayName.localeCompare(b.displayName, undefined, {
           numeric: true,
