@@ -1,6 +1,6 @@
 ---
 title: "Perplexity 的 Agent Skills 设计方法论"
-date: 2026-05-10
+date: 2026-05-10T10:00:00
 tags: [agent, skills, perplexity, ai-engineering]
 ---
 
