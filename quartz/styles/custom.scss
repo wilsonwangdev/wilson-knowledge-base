@@ -1,7 +1,7 @@
 @use "./base.scss";
 @use "./variables.scss" as *;
 
-// ===== Sidebar collapse toggle =====
+// ===== Sidebar collapse (desktop) — fixed button at left edge =====
 #quartz-body.sb-collapsed {
   @media all and ($desktop) {
     grid-template-columns: 0 1fr $sidePanelWidth;
@@ -13,16 +13,12 @@
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-      transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
     }
 
+    // Breathing room when sidebar is hidden
     .center, footer {
-      margin-left: 0;
+      padding-left: 3.5rem;
     }
-  }
-
-  .sidebar-collapse-btn svg {
-    transform: rotate(180deg);
   }
 }
 
@@ -30,31 +26,36 @@
   transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
 }
 
+// Fixed-position toggle button — always visible, like a drawer handle
 .sidebar-collapse-btn {
-  position: absolute;
-  bottom: 0.5rem;
-  right: 0.5rem;
-  z-index: 10;
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
   background: var(--light);
   border: 1px solid var(--lightgray);
-  border-radius: 4px;
+  border-left: none;
+  border-radius: 0 6px 6px 0;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 1.5rem 5px;
   color: var(--gray);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 150ms ease;
+  transition: padding 200ms ease, color 150ms ease, border-color 150ms ease;
 
   &:hover {
     color: var(--dark);
     border-color: var(--gray);
+    padding-left: 8px;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
   }
 
   svg {
-    width: 16px;
-    height: 16px;
-    transition: transform 250ms ease;
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -75,8 +76,15 @@
   }
 }
 
+// Desktop: balance left/right spacing around content column
+@media all and ($desktop) {
+  .center, footer {
+    padding-right: 1.25rem;
+  }
+}
+
 // ===== Mobile / H5 improvements =====
-@media (max-width: 768px) {
+@media all and ($mobile) {
   // Hide graph on mobile (canvas-based, unusable on small screens)
   .graph {
     display: none !important;
@@ -105,6 +113,9 @@
       flex-shrink: 1;
       min-width: 0;
     }
+
+    // Add right breathing room for hamburger button
+    padding-right: 0.5rem;
   }
 
   // Prevent horizontal scroll on mobile

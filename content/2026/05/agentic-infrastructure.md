@@ -55,8 +55,6 @@ Vercel 统一原语：AI SDK 6、Chat SDK、AI Gateway、Fluid Compute、Workflo
 
 > "当平台自己成为 Agent——理解行为、预测需求、自我修复——基础设施和应用的界限开始模糊。"
 
----
-
 ## 来源
 
 [Agentic Infrastructure — Vercel Blog](https://vercel.com/blog/agentic-infrastructure)

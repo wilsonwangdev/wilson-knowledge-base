@@ -5,19 +5,26 @@
 
   & > h3 {
     font-size: 1rem;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
   }
 
-  & > ul.overflow {
+  & > ul.backlinks-list {
     list-style: none;
     padding: 0;
-    margin: 0.5rem 0;
-    max-height: calc(100% - 2rem);
-    overscroll-behavior: contain;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
 
     & > li {
+      line-height: 1.45;
+
       & > a {
         background-color: transparent;
+        font-weight: $normalWeight;
+        font-size: 0.9rem;
+        display: block;
+        padding: 0.15rem 0;
       }
     }
   }
