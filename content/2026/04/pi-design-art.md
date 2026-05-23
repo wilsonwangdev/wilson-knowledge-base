@@ -5,8 +5,6 @@ source: https://zhanghandong.github.io/pi-book/
 tags: [agent, architecture, runtime, design]
 ---
 
-# pi 的设计艺术：构建生产级 Coding Agent 的架构决策
-
 ## 定位
 
 pi 是开源 **agent 运行时（runtime）**，非 LLM 调用库。调用库回答"怎么调 LLM"，pi 回答"调完之后怎么办"——工具执行、状态管理、上下文压缩、多轮循环。

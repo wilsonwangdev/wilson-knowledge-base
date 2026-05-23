@@ -59,12 +59,8 @@ Vercel 统一原语：AI SDK 6、Chat SDK、AI Gateway、Fluid Compute、Workflo
 
 ---
 
-## 💡 我的思考
+## Agent 总结
 
-这篇文章和我们在做的 **Agent Harness Dashboard** 高度相关：
-
-1. **Agentic Infrastructure 是 Harness 评估的核心维度** — 项目是否具备程序化部署能力，直接决定其 Agent 采用成熟度
-2. **数据印证了趋势** — 30% 部署来自 Agent 说明这不是未来时，是现在进行时
-3. **三层架构可作为评分模型的参考框架** — 部署就绪 / Agent 运行时 / 自愈能力
+Agentic Infrastructure 概念将 AI 编码的讨论从"模型能力"推进到"基础设施适配"层面。核心信号：当 30% 部署由 Agent 发起，基础设施需要从面向人类开发者转变为面向机器开发者。部署就绪、Agent 运行时、自愈能力三个维度可作为评估框架参考。
 
 关联笔记：[[agent-harness-engineering|Agent Harness Engineering — 代理的脚手架工程学]] [[self-driving-codebase|The Self-Driving Codebase — 后台代理与软件交付的未来]]

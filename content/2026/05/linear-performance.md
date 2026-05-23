@@ -2,10 +2,8 @@
 title: "Linear 为什么这么快？技术深度拆解"
 date: 2026-05-23
 source: https://performance.dev/how-is-linear-so-fast-a-technical-breakdown0516
-tags: [performance, linear, frontend, engineering]
+tags: [linear, performance, frontend, architecture, engineering]
 ---
-
-# Linear 为什么这么快？技术深度拆解
 
 ## TL;DR
 
@@ -39,6 +37,6 @@ React + TypeScript + MobX + Postgres + CDN。**坚持 CSR**。无边缘数据库
 
 > "我写的第一行代码就是同步引擎——这和你通常创业初期做的事很不一样。" —— Tuomas Artman
 
-## Wilson 的思考
+## Agent 总结
 
 CSR 没有死。性能优化本质是消除等待。粒度决定天花板——21MB 拆几百 chunk、50 issue 只 re-render 50 cell。细节是魔鬼——crossorigin 配错重复请求、transition:all 触发全布局重算——Linear 全做对了。

@@ -5,8 +5,6 @@ source: https://blog.cloudflare.com/cf-cli-local-explorer/
 tags: [cli, cloudflare, developer-tools]
 ---
 
-# Cloudflare CLI 设计
-
 ## 背景
 
 Cloudflare 100+ 产品、近 3,000 个 HTTP API 操作。AI 编码 Agent 逐渐成为 API 主要消费者，各接口一致性至关重要。

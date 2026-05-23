@@ -5,8 +5,6 @@ source: https://research.perplexity.ai/articles/designing-refining-and-maintaini
 tags: [agent, skills, perplexity, ai-engineering]
 ---
 
-# Perplexity 的 Agent Skills 设计方法论
-
 ## TL;DR
 
 Skills 是**上下文工程**而非代码工程。核心原则：**Context is expensive. Maximum signal per token.** 采用 Index → Load → Runtime 三层渐进式加载。通过 Gotchas 飞轮迭代提升长尾表现。黄金法则：「模型已经知道的，删掉它。」
@@ -35,6 +33,6 @@ Skills 是**上下文工程**而非代码工程。核心原则：**Context is ex
 
 > "Negative examples matter more than positive examples."
 
-## Wilson 的思考
+## Agent 总结
 
-和我们 Harness Dashboard 的 Skills 评估维度一致。上下文即成本的理念也值得知识库设计借鉴——每篇笔记追求高信号密度。
+Perplexity 将 Skills 视为一等公民进行全生命周期管理。上下文即成本的理念值得知识库设计借鉴——每篇笔记追求高信号密度。

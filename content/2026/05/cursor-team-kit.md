@@ -5,8 +5,6 @@ source: https://cursor.com/cn/marketplace/cursor/cursor-team-kit
 tags: [cursor, team, ai-tools, developer-experience]
 ---
 
-# Cursor Team Kit
-
 ## TL;DR
 
 Cursor 官方开源的开发自动化插件集：2 个 Subagent + 18 个 Skill + 2 个 Rule，覆盖 CI 监控、代码审查、PR 管理、CLI/UI 测试。核心理念：**零外部依赖**，纯本地工具链。

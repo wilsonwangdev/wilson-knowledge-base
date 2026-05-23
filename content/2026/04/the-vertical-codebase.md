@@ -5,8 +5,6 @@ source: https://tkdodo.eu/blog/the-vertical-codebase
 tags: [architecture, code-organization, software-design]
 ---
 
-# The Vertical Codebase（垂直代码库）
-
 ## 核心概念
 
 **水平结构**：按技术类型分（components/hooks/types/utils），分组的是"是什么"。

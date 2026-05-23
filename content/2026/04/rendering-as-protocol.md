@@ -5,8 +5,6 @@ source: https://canmi.net/posts/architecture/compile-time-rendering
 tags: [rendering, protocol, frontend, architecture]
 ---
 
-# Rendering as a Protocol — UI 应被描述而非被执行
-
 ## 核心观点
 
 **CTR（Compile-Time Rendering）**：把渲染从运行时搬到编译期，实现零运行时开销的页面生成。当前 SSR 的普遍问题：页面 95% 静态内容每请求都要完整跑 renderToString()。
