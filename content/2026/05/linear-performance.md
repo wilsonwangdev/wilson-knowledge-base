@@ -1,11 +1,10 @@
 ---
 title: "Linear 为什么这么快？技术深度拆解"
 date: 2026-05-23
-source: https://performance.dev/how-is-linear-so-fast-a-technical-breakdown0516
 tags: [linear, performance, frontend, architecture, engineering]
 ---
 
-## TL;DR
+## 一句话总结
 
 Linear 的性能秘诀：**把网络请求从用户眼前藏起来**。数据库跑在浏览器（IndexedDB），变更先写本地再异步同步，首次加载极致代码分割+预加载+SW 缓存，MobX 粒度精确到单 cell 重渲染。
 
@@ -36,6 +35,10 @@ React + TypeScript + MobX + Postgres + CDN。**坚持 CSR**。无边缘数据库
 > "构建优秀 Web 应用的秘诀，就是把所有网络请求从用户眼前藏起来。"
 
 > "我写的第一行代码就是同步引擎——这和你通常创业初期做的事很不一样。" —— Tuomas Artman
+
+## 来源
+
+[How Is Linear So Fast — performance.dev](https://performance.dev/how-is-linear-so-fast-a-technical-breakdown0516)
 
 ## Agent 总结
 

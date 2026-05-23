@@ -1,11 +1,10 @@
 ---
 title: "Cursor Team Kit"
 date: 2026-05-05
-source: https://cursor.com/cn/marketplace/cursor/cursor-team-kit
 tags: [cursor, team, ai-tools, developer-experience]
 ---
 
-## TL;DR
+## 一句话总结
 
 Cursor 官方开源的开发自动化插件集：2 个 Subagent + 18 个 Skill + 2 个 Rule，覆盖 CI 监控、代码审查、PR 管理、CLI/UI 测试。核心理念：**零外部依赖**，纯本地工具链。
 
@@ -24,6 +23,10 @@ Cursor 官方开源的开发自动化插件集：2 个 Subagent + 18 个 Skill +
 ### Rule
 - `no-inline-imports`、`typescript-exhaustive-switch`
 
-## 思考
+## Agent 总结
 
 亮点：1) 零外部依赖降低集成门槛 2) "Subagent + Skill + Rule" 三层架构清晰 3) `loop-on-ci` 闭环让 AI 承担"让 CI 绿"的责任。前提：GitHub + TypeScript 栈。
+
+## 来源
+
+[Cursor Team Kit — Cursor Marketplace](https://cursor.com/cn/marketplace/cursor/cursor-team-kit)

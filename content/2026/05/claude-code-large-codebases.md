@@ -1,11 +1,10 @@
 ---
 title: "Claude Code 在大规模代码库中的工作原理"
 date: 2026-05-16
-source: https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start
 tags: [claude-code, ai-coding, large-codebase, best-practices]
 ---
 
-## TL;DR
+## 一句话总结
 
 Claude Code 核心差异化：**Agentic Search 而非 RAG Index**——像人类工程师一样遍历文件系统、grep 精准查找，无需维护嵌入索引。**"Harness"比模型本身更重要**：CLAUDE.md → Hooks → Skills → Plugins → MCP → LSP → Subagents。
 
@@ -26,6 +25,10 @@ Claude Code 核心差异化：**Agentic Search 而非 RAG Index**——像人类
 1. **让代码库可导航**：CLAUDE.md 精益分层、子目录初始化、排除生成文件
 2. **持续维护配置**：每 3-6 月审查，模型进化后旧规则可能变成桎梏
 3. **指定 DRI**：Agent Manager 角色，先小范围跑通再推广
+
+## 来源
+
+[How Claude Code Works in Large Codebases — Anthropic](https://claude.com/blog/how-claude-code-works-in-large-codebases-best-practices-and-where-to-start)
 
 ## Agent 总结
 

@@ -1,13 +1,12 @@
 ---
 title: "Agent Harness Engineering — 代理的脚手架工程学"
 date: 2026-05-10
-source: https://x.com/addyosmani/status/2053231239721885918
 tags: [agent, harness, engineering]
 ---
 
 # Agent Harness Engineering — 代理的"脚手架工程学"
 
-## TL;DR
+## 一句话总结
 
 **Agent = Model + Harness。** 模型只是代理系统的一个输入，真正决定代理能否完成任务的，是包裹在模型外围的整个"马具"——提示词、工具、沙箱、钩子、子代理、反馈回路。中等模型+优秀harness，长期碾压优秀模型+糟糕harness。
 
@@ -28,6 +27,10 @@ tags: [agent, harness, engineering]
 ### 4. Harness 不消失，只迁移
 
 模型越强，harness 需求位移而非消失。旧约束该删就删，新脚手架该建就建。
+
+## 来源
+
+[Agent Harness Engineering — Addy Osmani](https://x.com/addyosmani/status/2053231239721885918)
 
 ## Agent 总结
 

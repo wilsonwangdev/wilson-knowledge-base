@@ -1,12 +1,10 @@
 ---
 title: "Agentic Infrastructure — Vercel 的 Agent 基础设施三层架构"
 date: 2026-05-23
-source: https://vercel.com/blog/agentic-infrastructure
-author: Tom Occhino (CPO, Vercel)
 tags: [agent, infrastructure, vercel, ai-native]
 ---
 
-## TL;DR
+## 一句话总结
 
 Vercel CPO Tom Occhino 提出「Agentic Infrastructure」概念：当软件最终执行者从人变成机器，基础设施必须再次进化。Vercel 上的 Agent 部署占比已达 30%，半年增长 1000%。
 
@@ -58,6 +56,10 @@ Vercel 统一原语：AI SDK 6、Chat SDK、AI Gateway、Fluid Compute、Workflo
 > "当平台自己成为 Agent——理解行为、预测需求、自我修复——基础设施和应用的界限开始模糊。"
 
 ---
+
+## 来源
+
+[Agentic Infrastructure — Vercel Blog](https://vercel.com/blog/agentic-infrastructure)
 
 ## Agent 总结
 

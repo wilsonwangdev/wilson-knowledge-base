@@ -1,9 +1,13 @@
 ---
 title: "Cloudflare CLI 设计"
 date: 2026-04-14
-source: https://blog.cloudflare.com/cf-cli-local-explorer/
 tags: [cli, cloudflare, developer-tools]
+
 ---
+
+## 一句话总结
+
+Cloudflare 用 TypeScript Schema 替代 OpenAPI 作为 100+ 产品、3000 个 API 的统一接口定义源，自动生成 CLI/SDK/Terraform/MCP/Docs，并内置 Local Explorer 让 Agent 在本地内省模拟资源。
 
 ## 背景
 
@@ -25,3 +29,7 @@ OpenAPI 只能描述 REST API。Cloudflare 引入 TypeScript Schema 作为统一
 公开测试功能，本地开发时内省 Worker 绑定的模拟资源。通过 `--local` 标志，CLI 命令无缝切换至本地 API 镜像。Agent 可直接交互。
 
 安装：`npx cf` 或 `npm install -g cf`
+
+## 来源
+
+[Building a CLI for All of Cloudflare — Cloudflare Blog](https://blog.cloudflare.com/cf-cli-local-explorer/)

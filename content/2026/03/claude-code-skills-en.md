@@ -1,11 +1,10 @@
 ---
 title: "Lessons from Building Claude Code: How We Use Skills"
 date: 2026-03-19
-source: https://x.com/trq212/status/2033949937936085378
 tags: [claude-code, ai-agent, skills, anthropic, developer-tools]
 ---
 
-## TL;DR
+## 一句话总结
 
 Thariq Shihipar from the Claude Code team shares hard-won lessons from managing hundreds of active Skills in production, systematizing nine Skill types, writing best practices, and distribution strategies.
 
@@ -27,7 +26,7 @@ Anthropic classifies Skills into nine types internally: Library & API References
 
 > "A common misconception is that skills are 'just markdown files', but they're folders that can include scripts, assets, data — the agent can discover, explore and manipulate them."
 
-## Source
+## 来源
 
 - [Original thread by @trq212](https://x.com/trq212/status/2033949937936085378)
 - [Chinese translation by @dotey](https://x.com/dotey/status/2034002188994060691)

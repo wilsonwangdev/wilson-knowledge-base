@@ -1,9 +1,13 @@
 ---
 title: "Rendering as a Protocol — UI 应被描述而非被执行"
 date: 2026-04-14
-source: https://canmi.net/posts/architecture/compile-time-rendering
 tags: [rendering, protocol, frontend, architecture]
+
 ---
+
+## 一句话总结
+
+CTR（Compile-Time Rendering）将渲染从运行时搬到编译期，用 JTD 契约 + Sentinel 哨兵 + Slot 标记实现零运行时开销的页面生成，告别水合错误且跨框架可用。
 
 ## 核心观点
 
@@ -27,3 +31,7 @@ tags: [rendering, protocol, frontend, architecture]
 - Serverless 友好（0.1-1ms vs SSR 100-300ms）
 - 跨端可移植（协议语言无关）
 - 前端框架无关（React/Vue/Svelte 均可）
+
+## 来源
+
+[Rendering as a Protocol — canmi.net](https://canmi.net/posts/architecture/compile-time-rendering)

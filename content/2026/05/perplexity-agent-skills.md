@@ -1,11 +1,10 @@
 ---
 title: "Perplexity 的 Agent Skills 设计方法论"
 date: 2026-05-10
-source: https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity
 tags: [agent, skills, perplexity, ai-engineering]
 ---
 
-## TL;DR
+## 一句话总结
 
 Skills 是**上下文工程**而非代码工程。核心原则：**Context is expensive. Maximum signal per token.** 采用 Index → Load → Runtime 三层渐进式加载。通过 Gotchas 飞轮迭代提升长尾表现。黄金法则：「模型已经知道的，删掉它。」
 
@@ -32,6 +31,10 @@ Skills 是**上下文工程**而非代码工程。核心原则：**Context is ex
 > "Self-generated Skills provide no benefit on average."
 
 > "Negative examples matter more than positive examples."
+
+## 来源
+
+[Designing, Refining, and Maintaining Agent Skills at Perplexity](https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity)
 
 ## Agent 总结
 
