@@ -44,4 +44,4 @@ date: 2026-05-23
 - [[claude-code-best-practices|Claude Code 最佳实践指南]]
 - [[codex-harness-engineering|工程技术：在智能体优先的世界中利用 Codex]]
 - [[effective-harnesses-long-running-agents|Effective Harnesses for Long-Running Agents]]
-- [[perplexity-computer-architecture|Perplexity Computer 深度解析]]
+- [[perplexity-computer|Perplexity Computer 深度解析]]

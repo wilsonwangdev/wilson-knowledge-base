@@ -67,4 +67,4 @@ Vercel 统一原语：AI SDK 6、Chat SDK、AI Gateway、Fluid Compute、Workflo
 2. **数据印证了趋势** — 30% 部署来自 Agent 说明这不是未来时，是现在进行时
 3. **三层架构可作为评分模型的参考框架** — 部署就绪 / Agent 运行时 / 自愈能力
 
-关联笔记：[[Agent Harness Engineering — 代理的脚手架工程学]] [[The Self-Driving Codebase — 后台代理与软件交付的未来]]
+关联笔记：[[agent-harness-engineering|Agent Harness Engineering — 代理的脚手架工程学]] [[self-driving-codebase|The Self-Driving Codebase — 后台代理与软件交付的未来]]
