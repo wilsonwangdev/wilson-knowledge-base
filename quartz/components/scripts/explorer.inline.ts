@@ -278,7 +278,14 @@ document.addEventListener("nav", async (e: CustomEventMap["nav"]) => {
     const mobileExplorer = explorer.querySelector(".mobile-explorer")
     if (!mobileExplorer) continue
 
-    if (mobileExplorer.checkVisibility()) {
+    // Safe visibility check — checkVisibility() is Chrome 105+/Safari 17+ only
+    // Throwing here prevents hide-until-loaded removal, breaking mobile nav entirely
+    const isVisible =
+      typeof (mobileExplorer as any).checkVisibility === "function"
+        ? (mobileExplorer as any).checkVisibility()
+        : window.getComputedStyle(mobileExplorer).display !== "none"
+
+    if (isVisible) {
       explorer.classList.add("collapsed")
       explorer.setAttribute("aria-expanded", "false")
 
