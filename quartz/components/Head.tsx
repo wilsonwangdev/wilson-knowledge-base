@@ -97,6 +97,12 @@ export default (() => {
             return resource
           }
         })}
+        <script
+          defer
+          src="/_vercel/insights/script.js"
+          data-sdkn="@vercel/analytics"
+          data-sdkv="1.5.0"
+        ></script>
       </head>
     )
   }
