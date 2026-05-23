@@ -29,6 +29,35 @@
     padding: 0.5rem 1rem;
   }
 
+  // Hide page title on mobile — uses space and wraps awkwardly
+  .page-title {
+    display: none;
+  }
+
+  // Left sidebar: prevent text overflow from Explorer folder names
+  .sidebar.left {
+    overflow-x: hidden;
+
+    & > * {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    // Allow Explorer hamburger to have its own space
+    .explorer {
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    // Prevent search/darkmode/reader flex from wrapping text
+    .flex-component {
+      flex-shrink: 1;
+      min-width: 0;
+    }
+  }
+
   // Search bar: full width on mobile
   .search {
     width: 100%;
@@ -72,5 +101,14 @@
 
   .article-title {
     font-size: 1.15rem;
+  }
+
+  // Left sidebar: even more aggressive compaction
+  .sidebar.left {
+    gap: 0.4rem;
+
+    .search {
+      max-width: calc(100% - 100px);
+    }
   }
 }

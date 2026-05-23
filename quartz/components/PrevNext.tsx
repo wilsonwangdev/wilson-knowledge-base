@@ -7,9 +7,9 @@ import style from "./styles/prevNext.scss"
 
 export default (() => {
   const PrevNext: QuartzComponent = ({ allFiles, fileData, displayClass, cfg }: QuartzComponentProps) => {
-    // Sort all content pages (those with dates) by date descending
+    // Sort all content pages with dates, excluding index and folder pages
     const pages = allFiles
-      .filter((f) => f.dates)
+      .filter((f) => f.dates && f.slug !== "index" && !f.slug?.startsWith("tags/"))
       .sort(byDateAndAlphabetical(cfg))
 
     // Find current position in sorted list
