@@ -98,11 +98,20 @@ export default (() => {
           }
         })}
         <script
-          defer
-          src="/_vercel/insights/script.js"
-          data-sdkn="@vercel/analytics"
-          data-sdkv="1.5.0"
-          onerror="this.remove()"
+          dangerouslySetInnerHTML={{
+            __html: `
+          // Only load Vercel Analytics on production, not localhost
+          if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            var s = document.createElement("script")
+            s.defer = true
+            s.src = "/_vercel/insights/script.js"
+            s.setAttribute("data-sdkn", "@vercel/analytics")
+            s.setAttribute("data-sdkv", "1.5.0")
+            s.onerror = function() { s.remove() }
+            document.head.appendChild(s)
+          }
+        `,
+          }}
         ></script>
       </head>
     )

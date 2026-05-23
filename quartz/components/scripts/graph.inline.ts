@@ -73,6 +73,10 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   const visited = getVisited()
   removeAllChildren(graph)
 
+  // Skip rendering when container is hidden (e.g. mobile CSS display:none).
+  // PixiJS WebGPU canvas creation with width=0 produces texture validation errors.
+  if (graph.offsetWidth <= 0) return
+
   let {
     drag: enableDrag,
     zoom: enableZoom,

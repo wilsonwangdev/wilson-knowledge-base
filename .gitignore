@@ -19,3 +19,4 @@ public/
 .env.local
 quartz-temp/
 .vercel
+.lycheecache

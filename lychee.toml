@@ -14,10 +14,14 @@ max_retries = 2
 accept = ["200..=204", "206", "429"]
 
 exclude = [
-  '^https?://(api\\.)?example\\.(com|org|net)(:\\d+)?(/|$)',
-  '^https?://localhost(:\\d+)?(/|$)',
-  '^https?://127\\.0\\.0\\.1',
+  '^https?://(api\.)?example\.(com|org|net)(:\d+)?(/|$)',
+  '^https?://localhost(:\d+)?(/|$)',
+  '^https?://127\.0\.0\.1',
   '^mailto:',
+  # OpenAI CDN blocks automated link checkers with 403
+  '^https?://openai\.com/',
+  # Zhihu articles often require login — false positive
+  '^https?://zhuanlan\.zhihu\.com/',
 ]
 
 exclude_path = ["node_modules", "public", ".quartz-cache"]

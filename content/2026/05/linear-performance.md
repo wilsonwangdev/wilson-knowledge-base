@@ -38,7 +38,7 @@ React + TypeScript + MobX + Postgres + CDN。**坚持 CSR**。无边缘数据库
 
 ## 来源
 
-[How Is Linear So Fast — performance.dev](https://performance.dev/how-is-linear-so-fast-a-technical-breakdown0516)
+[How Is Linear So Fast — performance.dev](https://performance.dev/how-is-linear-so-fast-a-technical-breakdown)
 
 ## Agent 总结
 
