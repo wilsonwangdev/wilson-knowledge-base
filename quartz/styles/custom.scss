@@ -15,6 +15,11 @@
       padding: 0.3rem 0;
     }
   }
+
+  // Scrollbar margin — don't let it hug the content
+  .explorer-ul {
+    padding-right: 0.5rem;
+  }
 }
 
 // ===== Mobile / H5 improvements =====
@@ -34,17 +39,8 @@
     display: none;
   }
 
-  // Left sidebar: prevent text overflow from Explorer folder names
+  // Left sidebar: compact layout, but DON'T clip the Explorer overlay
   .sidebar.left {
-    overflow-x: hidden;
-
-    & > * {
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
     // Allow Explorer hamburger to have its own space
     .explorer {
       flex-shrink: 0;
@@ -56,6 +52,11 @@
       flex-shrink: 1;
       min-width: 0;
     }
+  }
+
+  // Prevent horizontal scroll on mobile
+  html, body {
+    overflow-x: hidden;
   }
 
   // Search bar: full width on mobile
