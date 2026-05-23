@@ -76,7 +76,13 @@ const config: QuartzConfig = {
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
-      Plugin.FolderPage(),
+      Plugin.FolderPage({
+        sort: (a, b) => {
+          const aDate = (a as any).dates?.created?.getTime?.() ?? (a as any).frontmatter?.date ? new Date((a as any).frontmatter.date).getTime() : 0
+          const bDate = (b as any).dates?.created?.getTime?.() ?? (b as any).frontmatter?.date ? new Date((b as any).frontmatter.date).getTime() : 0
+          return bDate - aDate
+        },
+      }),
       Plugin.TagPage(),
       Plugin.ContentIndex({
         enableSiteMap: true,

@@ -38,7 +38,29 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        // Folders before files
+        if (a.isFolder && !b.isFolder) return -1
+        if (!a.isFolder && b.isFolder) return 1
+        // Both folders: alphabetical
+        if (a.isFolder && b.isFolder) {
+          return a.displayName.localeCompare(b.displayName, undefined, {
+            numeric: true,
+            sensitivity: "base",
+          })
+        }
+        // Both files: sort by date, newest first
+        const aDate = a.data?.date?.getTime() ?? 0
+        const bDate = b.data?.date?.getTime() ?? 0
+        if (bDate !== aDate) return bDate - aDate
+        // Fallback: alphabetical
+        return a.displayName.localeCompare(b.displayName, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        })
+      },
+    }),
   ],
   right: [
     Component.Graph(),
@@ -62,7 +84,25 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        if (a.isFolder && !b.isFolder) return -1
+        if (!a.isFolder && b.isFolder) return 1
+        if (a.isFolder && b.isFolder) {
+          return a.displayName.localeCompare(b.displayName, undefined, {
+            numeric: true,
+            sensitivity: "base",
+          })
+        }
+        const aDate = a.data?.date?.getTime() ?? 0
+        const bDate = b.data?.date?.getTime() ?? 0
+        if (bDate !== aDate) return bDate - aDate
+        return a.displayName.localeCompare(b.displayName, undefined, {
+          numeric: true,
+          sensitivity: "base",
+        })
+      },
+    }),
   ],
   right: [],
 }
