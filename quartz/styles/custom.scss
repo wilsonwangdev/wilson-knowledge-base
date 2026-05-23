@@ -1,4 +1,62 @@
 @use "./base.scss";
+@use "./variables.scss" as *;
+
+// ===== Sidebar collapse toggle =====
+#quartz-body.sb-collapsed {
+  @media all and ($desktop) {
+    grid-template-columns: 0 1fr $sidePanelWidth;
+
+    .sidebar.left {
+      width: 0;
+      min-width: 0;
+      padding: 0 !important;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
+    }
+
+    .center, footer {
+      margin-left: 0;
+    }
+  }
+
+  .sidebar-collapse-btn svg {
+    transform: rotate(180deg);
+  }
+}
+
+.sidebar.left {
+  transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
+}
+
+.sidebar-collapse-btn {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 6px;
+  color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 150ms ease;
+
+  &:hover {
+    color: var(--dark);
+    border-color: var(--gray);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 250ms ease;
+  }
+}
 
 // Explorer sidebar spacing — make article titles more comfortable to scan
 .explorer-content {
@@ -14,11 +72,6 @@
     & div > a {
       padding: 0.3rem 0;
     }
-  }
-
-  // Scrollbar margin — don't let it hug the content
-  .explorer-ul {
-    padding-right: 0.5rem;
   }
 }
 

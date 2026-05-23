@@ -115,7 +115,11 @@ button.desktop-explorer {
 .explorer-content {
   list-style: none;
   overflow: hidden;
+  // Scrollbar margin — don't let it hug the content
+  // (The scroll container is .explorer-content, not .explorer-ul)
   overflow-y: auto;
+  padding-right: 0.75rem;
+  scrollbar-gutter: stable;
   margin-top: 0.5rem;
 
   & ul {

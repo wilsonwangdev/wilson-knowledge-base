@@ -63,6 +63,7 @@ export const defaultContentPageLayout: PageLayout = {
         })
       },
     }),
+    Component.SidebarCollapse(),
   ],
   right: [
     Component.Graph(),
@@ -106,6 +107,7 @@ export const defaultListPageLayout: PageLayout = {
         })
       },
     }),
+    Component.SidebarCollapse(),
   ],
   right: [],
 }
