@@ -7,23 +7,21 @@ import style from "./styles/prevNext.scss"
 
 export default (() => {
   const PrevNext: QuartzComponent = ({ allFiles, fileData, displayClass, cfg }: QuartzComponentProps) => {
-    // Only show on content pages (not folder/tag pages)
-    if (!fileData.dates) return null
-
-    // Sort all files by date descending, filter out folders
+    // Sort all content pages (those with dates) by date descending
     const pages = allFiles
-      .filter((f) => f.dates && f.slug !== fileData.slug)
+      .filter((f) => f.dates)
       .sort(byDateAndAlphabetical(cfg))
 
-    // Find current position
+    // Find current position in sorted list
     const currentIndex = pages.findIndex((f) => f.slug === fileData.slug)
 
-    // If not found (e.g., folder page), don't render
+    // If not found (e.g., folder page or index), don't render
     if (currentIndex === -1) return null
 
     const prev = currentIndex > 0 ? pages[currentIndex - 1] : null
     const next = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null
 
+    // Don't render if at both ends (e.g., single article)
     if (!prev && !next) return null
 
     return (
