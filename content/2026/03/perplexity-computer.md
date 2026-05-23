@@ -1,6 +1,6 @@
 ---
 title: "Perplexity Computer 深度解析：Sandbox Matrix 架构"
-date: 2025-05-23
+date: 2026-03-06
 tags: [perplexity-computer, sandbox-matrix, multi-model-orchestration, micro-vm, agent-architecture]
 ---
 

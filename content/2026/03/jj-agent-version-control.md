@@ -1,6 +1,6 @@
 ---
 title: "用好你的 jj — Agent 时代的版本控制"
-date: 2026-03-16
+date: 2026-03-17
 tags: [version-control, jj, jujutsu, ai-agent, developer-workflow, git]
 ---
 

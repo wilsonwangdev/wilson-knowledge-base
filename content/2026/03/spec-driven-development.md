@@ -1,6 +1,6 @@
 ---
 title: "Spec Driven Development 的反思：银弹尚未出现"
-date: 2026-03-17
+date: 2026-03-19
 tags: [spec-driven-development, speckit, vibe-coding, ai-coding-agents, software-engineering]
 ---
 

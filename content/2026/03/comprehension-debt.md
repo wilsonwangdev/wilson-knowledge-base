@@ -1,6 +1,6 @@
 ---
 title: "Comprehension Debt — AI 生成代码的隐性成本"
-date: 2026-03-14
+date: 2026-03-29
 tags: [comprehension-debt, ai-generated-code, code-review, cognitive-load]
 ---
 
