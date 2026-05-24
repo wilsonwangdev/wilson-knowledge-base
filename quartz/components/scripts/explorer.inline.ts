@@ -20,61 +20,6 @@ type FolderState = {
 }
 
 let currentExplorerState: Array<FolderState>
-
-// Mobile overlay: backdrop element (created lazily)
-let mobileBackdrop: HTMLElement | null = null
-
-function ensureBackdrop(): HTMLElement {
-  if (!mobileBackdrop) {
-    mobileBackdrop = document.createElement("div")
-    mobileBackdrop.className = "mobile-explorer-backdrop"
-  }
-  return mobileBackdrop
-}
-
-function openMobilePanel(explorer: HTMLElement) {
-  const backdrop = ensureBackdrop()
-  if (!backdrop.parentNode) {
-    document.body.appendChild(backdrop)
-  }
-  // Fade in
-  requestAnimationFrame(() => backdrop.classList.add("visible"))
-
-  // Tap backdrop or swipe → close
-  backdrop.onclick = () => closeMobilePanel(explorer)
-
-  // Add close button to the panel
-  const content = explorer.querySelector(".explorer-content")
-  if (content && !content.querySelector(".mobile-nav-close")) {
-    const closeBtn = document.createElement("button")
-    closeBtn.className = "mobile-nav-close"
-    closeBtn.setAttribute("aria-label", "关闭导航")
-    closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
-    closeBtn.addEventListener("click", (e) => {
-      e.stopPropagation()
-      closeMobilePanel(explorer)
-    })
-    content.insertBefore(closeBtn, content.firstChild)
-  }
-
-  document.documentElement.classList.add("mobile-no-scroll")
-}
-
-function closeMobilePanel(explorer: HTMLElement) {
-  explorer.classList.add("collapsed")
-  explorer.setAttribute("aria-expanded", "false")
-  if (mobileBackdrop) {
-    mobileBackdrop.classList.remove("visible")
-    // Remove after transition
-    setTimeout(() => {
-      if (mobileBackdrop && !mobileBackdrop.classList.contains("visible")) {
-        mobileBackdrop.remove()
-      }
-    }, 300)
-  }
-  document.documentElement.classList.remove("mobile-no-scroll")
-}
-
 function toggleExplorer(this: HTMLElement) {
   const nearestExplorer = this.closest(".explorer") as HTMLElement
   if (!nearestExplorer) return
@@ -84,23 +29,10 @@ function toggleExplorer(this: HTMLElement) {
     nearestExplorer.getAttribute("aria-expanded") === "true" ? "false" : "true",
   )
 
-  // Check if this is the mobile hamburger
-  const isMobileToggle = this.classList.contains("mobile-explorer")
-
   if (!explorerCollapsed) {
-    // Panel is now OPEN
-    if (isMobileToggle) {
-      openMobilePanel(nearestExplorer)
-    } else {
-      document.documentElement.classList.add("mobile-no-scroll")
-    }
+    document.documentElement.classList.add("mobile-no-scroll")
   } else {
-    // Panel is now CLOSED
-    if (isMobileToggle) {
-      closeMobilePanel(nearestExplorer)
-    } else {
-      document.documentElement.classList.remove("mobile-no-scroll")
-    }
+    document.documentElement.classList.remove("mobile-no-scroll")
   }
 }
 
