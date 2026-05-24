@@ -35,7 +35,6 @@ export const sharedPageComponents: SharedLayout = {
   ],
   footer: Component.Footer({
     links: {
-      "🌐 fe.wilsonhandbook.online": "https://fe.wilsonhandbook.online",
       GitHub: "https://github.com/wilsonwangdev/wilson-knowledge-base",
     },
   }),
