@@ -191,3 +191,17 @@ a.internal.alias {
 .prev-next .prev-next-links {
   margin-top: 1.5rem;
 }
+
+// Backlinks: only one instance per viewport
+// Desktop: show sidebar Backlinks, hide afterBody Backlinks
+// Mobile:  show afterBody Backlinks (before Comments), hide sidebar Backlinks
+@media all and ($desktop) {
+  .center > .backlinks {
+    display: none;
+  }
+}
+@media all and ($mobile) {
+  .sidebar.right > .backlinks {
+    display: none;
+  }
+}

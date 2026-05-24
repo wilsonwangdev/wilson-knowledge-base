@@ -15,6 +15,10 @@ export const sharedPageComponents: SharedLayout = {
       }),
       condition: (page) => page.fileData.slug === "index",
     }),
+    Component.ConditionalRender({
+      component: Component.Backlinks(),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
     Component.PrevNext(),
     Component.ConditionalRender({
       component: Component.Comments({
