@@ -26,7 +26,13 @@
   transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
 }
 
-// Fixed-position toggle button — always visible, like a drawer handle
+// Fixed-position toggle button — desktop only
+@media all and ($mobile) {
+  .sidebar-collapse-btn {
+    display: none;
+  }
+}
+
 .sidebar-collapse-btn {
   position: fixed;
   left: 0;
@@ -66,21 +72,33 @@
       padding: 0.25rem 0;
       line-height: 1.6;
       display: block;
+      overflow-wrap: anywhere;
     }
   }
 
   .folder-container {
     & div > a {
       padding: 0.3rem 0;
+      overflow-wrap: anywhere;
     }
   }
 }
 
-// Desktop: balance left/right spacing around content column
+// Content column: ensure padding doesn't cause overflow
+.center {
+  box-sizing: border-box;
+}
 @media all and ($desktop) {
   .center, footer {
     padding-right: 1.25rem;
   }
+}
+
+// Remove highlight background from folder listing article title links
+// (Quartz applies a.internal { background-color: var(--highlight) } globally)
+a.internal.alias {
+  background-color: transparent;
+  padding: 0;
 }
 
 // ===== Mobile / H5 — minimal overrides, let Quartz handle the rest =====
@@ -110,6 +128,42 @@
   .breadcrumb-container {
     font-size: 0.85rem;
     margin-bottom: 0.5rem;
+  }
+
+  // Content area: right-side breathing room for article titles
+  .center {
+    padding-right: 1.25rem;
+  }
+
+  // Prevent long headings from hugging the right edge
+  h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+
+  // Prevent double-tap zoom on interactive elements (iOS Safari)
+  a, button {
+    touch-action: manipulation;
+  }
+
+  // Ensure explorer drawer displays when expanded on mobile
+  // Fix: .explorer has overflow:hidden + position:relative on mobile,
+  // which clips the absolutely-positioned explorer-content (height: 100dvh).
+  // Override overflow to visible when expanded so the drawer isn't cropped.
+  .explorer:not(.collapsed) {
+    overflow: visible;
+  }
+  .explorer:not(.collapsed) > .explorer-content {
+    visibility: visible;
+  }
+
+  // Explorer drawer: right padding so long titles don't hug the edge
+  // Also reduce folder sub-list indentation to give titles more width on mobile
+  .explorer .explorer-content {
+    padding-right: 1.25rem;
+  }
+  .explorer-content .folder-outer > ul {
+    margin-left: 0;
+    padding-left: 0.5rem;
   }
 
   // Prevent horizontal scroll
