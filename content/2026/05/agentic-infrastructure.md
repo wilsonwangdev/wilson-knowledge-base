@@ -63,4 +63,7 @@ Vercel 统一原语：AI SDK 6、Chat SDK、AI Gateway、Fluid Compute、Workflo
 
 Agentic Infrastructure 概念将 AI 编码的讨论从"模型能力"推进到"基础设施适配"层面。核心信号：当 30% 部署由 Agent 发起，基础设施需要从面向人类开发者转变为面向机器开发者。部署就绪、Agent 运行时、自愈能力三个维度可作为评估框架参考。
 
-关联笔记：[[agent-harness-engineering|Agent Harness Engineering — 代理的脚手架工程学]] [[self-driving-codebase|The Self-Driving Codebase — 后台代理与软件交付的未来]]
+**关联笔记：**
+
+- [[agent-harness-engineering|Agent Harness Engineering — 代理的脚手架工程学]]
+- [[self-driving-codebase|The Self-Driving Codebase — 后台代理与软件交付的未来]]
