@@ -108,6 +108,11 @@ a.internal.alias {
     display: none !important;
   }
 
+  // ReaderMode: hides graph/TOC on desktop, but both are already hidden on mobile
+  .readermode {
+    display: none;
+  }
+
   // Page title: hide to save header space
   .page-title {
     display: none;
