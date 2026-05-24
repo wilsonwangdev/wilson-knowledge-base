@@ -78,9 +78,15 @@ const config: QuartzConfig = {
       Plugin.ContentPage(),
       Plugin.FolderPage({
         sort: (a, b) => {
-          const aDate = (a as any).dates?.created?.getTime?.() ?? (a as any).frontmatter?.date ? new Date((a as any).frontmatter.date).getTime() : 0
-          const bDate = (b as any).dates?.created?.getTime?.() ?? (b as any).frontmatter?.date ? new Date((b as any).frontmatter.date).getTime() : 0
-          return bDate - aDate
+          // During build, file data has dates.created (from CreatedModifiedDate)
+          // or frontmatter.date. At runtime (SPA), contentIndex has top-level date.
+          const getDate = (x: any): number => {
+            if (x.dates?.created) return new Date(x.dates.created).getTime()
+            if (x.date) return new Date(x.date).getTime()
+            if (x.frontmatter?.date) return new Date(x.frontmatter.date).getTime()
+            return 0
+          }
+          return getDate(b) - getDate(a)
         },
       }),
       Plugin.TagPage(),
