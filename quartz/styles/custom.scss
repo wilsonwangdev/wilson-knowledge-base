@@ -183,3 +183,11 @@ a.internal.alias {
     font-size: 1.15rem;
   }
 }
+
+// Remove PrevNext's own <hr> — Quartz already inserts a separator before it
+.prev-next > hr {
+  display: none;
+}
+.prev-next .prev-next-links {
+  margin-top: 1.5rem;
+}
