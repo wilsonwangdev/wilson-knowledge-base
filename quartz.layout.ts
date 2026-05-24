@@ -16,6 +16,22 @@ export const sharedPageComponents: SharedLayout = {
       condition: (page) => page.fileData.slug === "index",
     }),
     Component.PrevNext(),
+    Component.ConditionalRender({
+      component: Component.Comments({
+        provider: "giscus",
+        options: {
+          repo: "wilsonwangdev/wilson-knowledge-base",
+          repoId: "R_kgDOSlyUHA",
+          category: "General",
+          categoryId: "DIC_kwDOSlyUHM4C9vfI",
+          mapping: "pathname",
+          lang: "zh-CN",
+          reactionsEnabled: true,
+          inputPosition: "bottom",
+        },
+      }),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
   ],
   footer: Component.Footer({
     links: {
