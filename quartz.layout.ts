@@ -8,7 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [
     Component.ConditionalRender({
       component: Component.RecentNotes({
-        title: "最近阅读",
+        title: "阅读列表",
         limit: 25,
         filter: (f: any) => f.slug !== "index",
         showTags: false,
