@@ -206,11 +206,11 @@ a.internal.alias {
   }
 }
 
-// Rename Backlinks title from "反向链接" to "关联链接"
+// Rename Backlinks title from "反向链接" to "关联阅读"
 .backlinks > h3 {
   font-size: 0;
 }
 .backlinks > h3::before {
-  content: "关联链接";
+  content: "关联阅读";
   font-size: 1rem;
 }
