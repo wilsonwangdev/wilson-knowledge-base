@@ -183,3 +183,18 @@ a.internal.alias {
     font-size: 1.15rem;
   }
 }
+
+// Backlinks: multi-column grid layout (desktop)
+@media all and ($desktop) {
+  .backlinks > ul.backlinks-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem 0.5rem;
+
+    & > li {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
