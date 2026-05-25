@@ -12,7 +12,7 @@
 
 | 板块 | 内容 | 说明 |
 |------|------|------|
-| 📖 **阅读列表** | 21 篇技术笔记 | AI Agent 工程、Claude Code、Cursor、Perplexity、Linear 等 |
+| 📖 **阅读列表** | 技术笔记 | AI Agent 工程、Claude Code、Cursor、Perplexity、Linear 等 |
 | 📦 **仓库列表** | 开源项目发现 | 记录有趣的开源仓库，按发现时间分组 |
 | 🔍 **全文搜索** | FlexSearch 索引 | 客户端全文检索，关键词直达 |
 | 🔗 **双向链接** | `[[wikilinks]]` | 笔记间通过链接相互关联，点开即达 |
@@ -80,11 +80,11 @@ python3 -m http.server 8080 -d public
 ├── content/                  # Markdown 源文件
 │   ├── index.md              #   首页
 │   ├── 阅读列表/             #   阅读笔记
-│   │   ├── 2026年03月/       #     11 篇
-│   │   ├── 2026年04月/       #     4 篇
-│   │   └── 2026年05月/       #     6 篇
+│   │   ├── 2026年03月/       #     按年月分组
+│   │   ├── 2026年04月/
+│   │   └── 2026年05月/
 │   └── 仓库列表/             #   开源项目发现
-│       └── 2026年05月/       #     1 个
+│       └── 2026年05月/
 ├── quartz/                   # Quartz 框架源码（v4.5.2）
 │   ├── build.ts              #   构建主流程
 │   ├── cfg.ts                #   类型定义
@@ -96,7 +96,7 @@ python3 -m http.server 8080 -d public
 │   │       ├── custom.scss   #     ← 核心自定义样式
 │   │       └── rssLink.scss  #     ← RSS 按钮样式
 │   ├── plugins/              #   Transformers / Filters / Emitters
-│   ├── i18n/                 #   30 种语言（含 zh-CN）
+│   ├── i18n/                 #   多语言支持（含 zh-CN）
 │   └── util/                 #   工具函数
 ├── quartz.config.ts          # 主配置（站点名、语言、主题、插件）
 ├── quartz.layout.ts          # 布局配置（三栏 Grid 定义、组件排列）
@@ -126,9 +126,7 @@ Content (Markdown + Frontmatter)
   ├─ Filters (过滤草稿)
   └─ Emitters (生成 HTML、RSS、Sitemap、OG Image、Tag Pages)
       │
-      └─ public/ (141 个静态文件)
-          │
-          └─ Vercel 部署 → kb.wilsonhandbook.online
+      └─ public/ → Vercel 部署 → kb.wilsonhandbook.online
 ```
 
 **页面布局：**
