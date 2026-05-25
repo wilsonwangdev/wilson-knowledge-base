@@ -262,7 +262,29 @@
 </table>
 <p><strong>核心原则：Let Quartz be Quartz。框架的移动端行为是经过验证的——不要重新发明它。</strong></p>
     </div>
-    <p class="footer">Wilson's Knowledge Base · 开发文档 · Powered by GitHub Pages · 最后更新 2026-05-26 00:15</p>
+    <p class="footer">Wilson's Knowledge Base · 开发文档 · Powered by GitHub Pages · 最后更新 <span id="last-updated">...</span></p>
   </div>
+  <script>
+    (async () => {
+      const el = document.getElementById('last-updated');
+      if (!el) return;
+      try {
+        const path = location.pathname.replace(/\/$/, '/index.html');
+        const file = path.split('/').pop() || 'index.html';
+        const resp = await fetch(
+          `https://api.github.com/repos/wilsonwangdev/wilson-knowledge-base/commits?path=docs/${file}&page=1&per_page=1`
+        );
+        if (!resp.ok) throw new Error('API error');
+        const [commit] = await resp.json();
+        const d = new Date(commit.commit.committer.date);
+        el.textContent = d.toLocaleString('zh-CN', {
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        });
+      } catch {
+        el.textContent = '(获取失败)';
+      }
+    })();
+  </script>
 </body>
 </html>
