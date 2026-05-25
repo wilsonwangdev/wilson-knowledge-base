@@ -85,6 +85,7 @@ export default (() => {
         <link rel="icon" href={iconPath} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        <meta name="follow.it-verification-code" content="tS1qGKVSggq9ryB9JL2H" />
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
