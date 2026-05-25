@@ -56,6 +56,8 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.PostSubscribe(),
       condition: (page) => page.fileData.slug !== "index",
     }),
+    // Newsletter signup — all pages, sits above footer
+    Component.NewsletterFooter(),
   ],
   footer: Component.Footer({
     links: {

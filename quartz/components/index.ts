@@ -26,6 +26,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import PrevNext from "./PrevNext"
 import PostSubscribe from "./PostSubscribe"
+import NewsletterFooter from "./NewsletterFooter"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   ConditionalRender,
   PrevNext,
   PostSubscribe,
+  NewsletterFooter,
 }
