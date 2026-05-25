@@ -16,6 +16,16 @@ export const sharedPageComponents: SharedLayout = {
       condition: (page) => page.fileData.slug === "index",
     }),
     Component.ConditionalRender({
+      component: Component.RecentNotes({
+        title: "精选开源项目",
+        limit: 10,
+        filter: (f: any) =>
+          f.slug?.startsWith("精选开源项目/") && f.slug !== "精选开源项目",
+        showTags: false,
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ConditionalRender({
       component: Component.Backlinks(),
       condition: (page) => page.fileData.slug !== "index",
     }),
@@ -79,8 +89,15 @@ export const defaultContentPageLayout: PageLayout = {
         // Folders before files
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
-        // Both folders: reverse chronological (newest first)
+        // Top-level folders: fixed order
+        const order = ["阅读列表", "精选开源项目"]
         if (a.isFolder && b.isFolder) {
+          const aIdx = order.indexOf(a.displayName)
+          const bIdx = order.indexOf(b.displayName)
+          if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx
+          if (aIdx !== -1) return -1
+          if (bIdx !== -1) return 1
+          // Both folders: reverse chronological (newest first)
           return b.displayName.localeCompare(a.displayName, undefined, {
             numeric: true,
             sensitivity: "base",
