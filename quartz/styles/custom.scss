@@ -13,11 +13,6 @@
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
-
-      // Prevent text reflow during collapse animation
-      * {
-        white-space: nowrap;
-      }
     }
 
     // Breathing room when sidebar is hidden
@@ -28,7 +23,7 @@
 }
 
 .sidebar.left {
-  transition: width 250ms ease, opacity 250ms ease, padding 250ms ease;
+  transition: width 300ms ease, opacity 150ms ease, padding 300ms ease;
 }
 
 // Fixed-position toggle button — desktop only
@@ -67,6 +62,25 @@
   svg {
     width: 18px;
     height: 18px;
+  }
+}
+
+// Reader mode: collapse both sidebars for full-width reading
+:root[reader-mode="on"] {
+  @media all and ($desktop) {
+    #quartz-body {
+      grid-template-columns: 0 1fr 0;
+
+      .sidebar.left,
+      .sidebar.right {
+        width: 0;
+        min-width: 0;
+        padding: 0 !important;
+        overflow: hidden;
+        pointer-events: none;
+        transition: width 300ms ease, opacity 150ms ease;
+      }
+    }
   }
 }
 
