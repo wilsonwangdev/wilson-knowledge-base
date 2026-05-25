@@ -103,19 +103,38 @@ GitHub · RSS · 📬 邮件订阅
 </a>
 ```
 
-这些 SVG 在邮件客户端中**完全不渲染**，导致邮件内容混乱。修复方法是在 RSS 生成时用正则剥除：
+这些 SVG 在邮件客户端中**完全不渲染**，导致邮件内容混乱。修复方法是在 RSS 生成时用正则剥除。
+
+**⚠️ 关键：`cleanHtml` 必须在 `escapeHTML` 之前执行。**
 
 ```ts
 // quartz/plugins/emitters/contentIndex.tsx
 
-const cleanHtml = (html: string | undefined): string | undefined => {
-  if (!html) return html
+// ★ 定制 — 清洗函数（模块级，在 escapeHTML 之前调用）
+const cleanHtml = (html: string): string => {
   return html.replace(/<a\s+role="anchor"[^>]*>.*?<\/a>/g, "")
 }
 
-// 在 createURLEntry 中使用
-<description><![CDATA[ ${cleanHtml(content.richContent)} ]]></description>
+// emit() 中构建 richContent 时
+richContent: opts?.rssFullHtml
+  ? escapeHTML(cleanHtml(toHtml(tree as Root, { allowDangerousHtml: true })))
+  : undefined,
+//           ^^^^^^^^  先清洗原始 HTML，再编码
 ```
+
+### 为什么第一次修复（fc0079c）没生效
+
+```text
+修复前流程:
+  toHtml() → 原始 HTML  →  escapeHTML()  →  编码后文本  →  cleanHtml() ❌
+                       "<a role=..."     "&lt;a role=..."  正则匹配不到
+
+修复后流程 (3f62ec7):
+  toHtml() → 原始 HTML  →  cleanHtml()  →  干净 HTML  →  escapeHTML()  ✅
+                       anchor 已剥除
+```
+
+`escapeHTML` 把 `<` 编码成 `&lt;` 后，正则 `/a\s+role="anchor"/` 不再匹配。HTML 清洗必须在编码前操作原始字符串。
 
 ---
 

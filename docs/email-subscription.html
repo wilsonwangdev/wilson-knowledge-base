@@ -108,6 +108,7 @@
       <a href="framework-decision.html">框架决策</a>
       <a href="quartz-capability-analysis.html">能力分析</a>
       <a href="email-subscription.html" class="active">邮件订阅</a>
+      <a href="rss-pipeline.html">RSS 管线</a>
     </nav>
 
     <section>
@@ -149,10 +150,12 @@
       <h3>2. NewsletterFooter 组件</h3>
       <p>所有页面 footer 上方的紧凑 inline 表单，POST 到 follow.it API 即时订阅。</p>
 
-      <h3>3. RSS 内容清洗</h3>
+      <h3>3. RSS 内容清洗 ★</h3>
       <p>默认 RSS 输出包含 Quartz 锚点 SVG（<code>&lt;a role=&quot;anchor&quot;&gt;</code>），邮件客户端无法渲染。通过正则剥除：</p>
       <pre><code>const cleanHtml = (html) =>
   html?.replace(/&lt;a\s+role=&quot;anchor&quot;[^&gt;]*&gt;.*?&lt;\/a&gt;/g, &quot;&quot;)</code></pre>
+
+      <p><b>注意：</b><code>cleanHtml()</code> 必须在 <code>escapeHTML()</code> 之前调用。第一次实现（<code>fc0079c</code>）把清洗放在了已编码的文本上，导致正则匹配不到，锚点 SVG 原样漏出到邮件。修复见 <a href="rss-pipeline.html" style="color:#22d3ee">RSS 管线文档</a>。</p>
     </section>
 
     <section>
