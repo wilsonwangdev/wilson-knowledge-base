@@ -2,8 +2,7 @@
 @use "./variables.scss" as *;
 
 // Reader mode: fade sidebars (space preserved) + hide media
-// Sidebars use opacity so content doesn't shift, and hover reveals
-// the ReaderMode button so user can always exit
+// Floating exit button injected by readermode script — no hover-reveal needed
 :root[reader-mode="on"] {
   @media all and ($desktop) {
     .sidebar.left,
@@ -11,11 +10,6 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
-
-      &:hover {
-        opacity: 1;
-        pointer-events: auto;
-      }
     }
   }
 
@@ -24,6 +18,43 @@
     img, video, iframe, .mermaid {
       display: none;
     }
+  }
+}
+
+// Floating exit button — appears in reader mode
+.readermode-exit {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    color: var(--dark);
+    border-color: var(--gray);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Hide exit button on mobile (reader mode is desktop-only)
+@media all and ($mobile) {
+  .readermode-exit {
+    display: none;
   }
 }
 
