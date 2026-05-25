@@ -4,7 +4,8 @@
 // Reader mode: fade sidebars (space preserved) + hide media
 // Floating exit button injected by readermode script — no hover-reveal needed
 :root[reader-mode="on"] {
-  @media all and ($desktop) {
+  // Cover both tablet (800-1200px) and desktop (≥1200px) — sidebar exists on both
+  @media all and (min-width: 800px) {
     .sidebar.left,
     .sidebar.right {
       opacity: 0;
