@@ -1,71 +1,7 @@
 @use "./base.scss";
 @use "./variables.scss" as *;
 
-// ===== Sidebar collapse (desktop) — fixed button at left edge =====
-#quartz-body.sb-collapsed {
-  @media all and ($desktop) {
-    grid-template-columns: 0 1fr $sidePanelWidth;
-
-    .sidebar.left {
-      width: 0;
-      min-width: 0;
-      padding: 0 !important;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    // Breathing room when sidebar is hidden
-    .center, footer {
-      padding-left: 3.5rem;
-    }
-  }
-}
-
-.sidebar.left {
-  transition: width 300ms ease, opacity 150ms ease, padding 300ms ease;
-}
-
-// Fixed-position toggle button — desktop only
-@media all and ($mobile) {
-  .sidebar-collapse-btn {
-    display: none;
-  }
-}
-
-.sidebar-collapse-btn {
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  background: var(--light);
-  border: 1px solid var(--lightgray);
-  border-left: none;
-  border-radius: 0 6px 6px 0;
-  cursor: pointer;
-  padding: 1.5rem 5px;
-  color: var(--gray);
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: padding 200ms ease, color 150ms ease, border-color 150ms ease;
-
-  &:hover {
-    color: var(--dark);
-    border-color: var(--gray);
-    padding-left: 8px;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
-  }
-
-  svg {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-// Reader mode: collapse both sidebars for full-width reading
+// Reader mode: collapse both sidebars + hide media for distraction-free reading
 :root[reader-mode="on"] {
   @media all and ($desktop) {
     #quartz-body {
@@ -80,6 +16,13 @@
         pointer-events: none;
         transition: width 300ms ease, opacity 150ms ease;
       }
+    }
+  }
+
+  // Hide images / media / embeds in reader mode for distraction-free reading
+  .center {
+    img, video, iframe, .mermaid {
+      display: none;
     }
   }
 }

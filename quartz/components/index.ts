@@ -25,7 +25,6 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import PrevNext from "./PrevNext"
-import SidebarCollapse from "./SidebarCollapse"
 
 export {
   ArticleTitle,
@@ -55,5 +54,4 @@ export {
   Flex,
   ConditionalRender,
   PrevNext,
-  SidebarCollapse,
 }

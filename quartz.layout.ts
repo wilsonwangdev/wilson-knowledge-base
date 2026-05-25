@@ -119,9 +119,14 @@ export const defaultContentPageLayout: PageLayout = {
         })
       },
     }),
-    Component.SidebarCollapse(),
   ],
   right: [
+    // Homepage: show global graph (depth=-1) since index has no wikilinks
+    Component.ConditionalRender({
+      component: Component.Graph({ localGraph: { depth: -1 } }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    // Article pages: standard local graph (depth=1)
     Component.ConditionalRender({
       component: Component.Graph(),
       condition: (page) => page.fileData.slug !== "index",
@@ -167,7 +172,6 @@ export const defaultListPageLayout: PageLayout = {
         })
       },
     }),
-    Component.SidebarCollapse(),
   ],
   right: [],
 }
