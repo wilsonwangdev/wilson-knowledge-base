@@ -13,6 +13,11 @@
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
+
+      // Prevent text reflow during collapse animation
+      * {
+        white-space: nowrap;
+      }
     }
 
     // Breathing room when sidebar is hidden
