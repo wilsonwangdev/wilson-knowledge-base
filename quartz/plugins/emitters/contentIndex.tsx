@@ -51,16 +51,14 @@ function generateSiteMap(cfg: GlobalConfiguration, idx: ContentIndexMap): string
   return `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${urls}</urlset>`
 }
 
+// Strip Quartz heading anchor SVGs from HTML — they bloat emails and
+// don't render in email clients. Must be called on RAW HTML, not escaped.
+const cleanHtml = (html: string): string => {
+  return html.replace(/<a\s+role="anchor"[^>]*>.*?<\/a>/g, "")
+}
+
 function generateRSSFeed(cfg: GlobalConfiguration, idx: ContentIndexMap, limit?: number): string {
   const base = cfg.baseUrl ?? ""
-
-  // Strip Quartz heading anchor SVGs from RSS HTML — they bloat emails and
-  // don't render in email clients
-  const cleanHtml = (html: string | undefined): string | undefined => {
-    if (!html) return html
-    // Remove <a role="anchor">...</a> (the heading permalink SVGs)
-    return html.replace(/<a\s+role="anchor"[^>]*>.*?<\/a>/g, "")
-  }
 
   const createURLEntry = (slug: SimpleSlug, content: ContentDetails): string => `<item>
     <title>${escapeHTML(content.title)}</title>
@@ -119,7 +117,7 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
             tags: file.data.frontmatter?.tags ?? [],
             content: file.data.text ?? "",
             richContent: opts?.rssFullHtml
-              ? escapeHTML(toHtml(tree as Root, { allowDangerousHtml: true }))
+              ? escapeHTML(cleanHtml(toHtml(tree as Root, { allowDangerousHtml: true })))
               : undefined,
             date: date,
             description: file.data.description ?? "",
