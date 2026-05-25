@@ -73,23 +73,15 @@ Plugin.ContentIndex({
 </form>
 ```
 
-### 3. PostSubscribe CTA
-
-文章底部（评论组件上方）的提示行：
-
-```
-喜欢这篇文章？ 📬 邮件订阅，新文章自动送达。
-```
-
-指向 follow.it landing page 作为备选入口。
-
-### 4. Footer 链接
+### 3. Footer 链接
 
 页面底部 footer 中与 GitHub、RSS 并列：
 
 ```
-GitHub · RSS · 📬 邮件订阅
+GitHub · RSS
 ```
+
+（邮件订阅只保留 NewsletterFooter 一个入口，footer 中不再重复。）
 
 ---
 
@@ -176,23 +168,20 @@ follow.it 会自动将 RSS 的 HTML 内容渲染为邮件。可通过后台自�
 ```
 用户浏览站点
     │
-    ├── 看到 NewsletterFooter 表单 → 填邮箱 → POST follow.it API ──┐
-    │                                                               │
-    ├── 读文章 → PostSubscribe CTA → follow.it landing page ───────┤
-    │                                                               │
-    └── Footer "📬 邮件订阅" → follow.it landing page ──────────────┤
-                                                                    ▼
-                                                            follow.it 订阅列表
-                                                                    │
-┌───────────────────────────────────────────────────────────────────┤
-│  站长发布新文章                                                     │
-│      │                                                             │
-│      ▼                                                             │
-│  Quartz build → RSS 更新 → follow.it 检测 ─────────────────────────┘
+    └── 看到 NewsletterFooter 表单 → 填邮箱 → POST follow.it API
+                                                    │
+                                                    ▼
+                                            follow.it 订阅列表
+                                                    │
+┌───────────────────────────────────────────────────┤
+│  站长发布新文章                                     │
+│      │                                             │
+│      ▼                                             │
+│  Quartz build → RSS 更新 → follow.it 检测 ─────────┘
 │                                          │
 │                                          ▼
 │                                    邮件群发给所有订阅者
-└───────────────────────────────────────────────────────────────────┘
+└───────────────────────────────────────────────────┘
 ```
 
 ---
@@ -213,11 +202,10 @@ follow.it 会自动将 RSS 的 HTML 内容渲染为邮件。可通过后台自�
 
 | 文件 | 作用 |
 |------|------|
-| `quartz/components/NewsletterFooter.tsx` | footer 上方 inline 订阅表单 |
-| `quartz/components/PostSubscribe.tsx` | 文章底部 CTA |
+| `quartz/components/NewsletterFooter.tsx` | footer 上方 inline 订阅表单（唯一订阅入口） |
 | `quartz/components/styles/newsletterFooter.scss` | 表单样式（明暗自适应） |
-| `quartz/components/styles/postSubscribe.scss` | CTA 样式 |
-| `quartz/plugins/emitters/contentIndex.tsx` | RSS 生成 + SVG 清洗 |
+| `quartz/plugins/emitters/contentIndex.tsx` | RSS 生成 + cleanHtml 清洗 |
 | `quartz/components/Head.tsx` | follow.it 验证 meta 标签 |
 | `quartz.layout.ts` | 组件布局注册 |
 | `docs/subscription-architecture.html` | 架构图 |
+| `docs/rss-pipeline.html` | RSS 管线详解 |
