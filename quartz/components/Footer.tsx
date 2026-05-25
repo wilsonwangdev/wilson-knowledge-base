@@ -10,12 +10,23 @@ interface Options {
 export default ((opts?: Options) => {
   const Footer: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
     const year = new Date().getFullYear()
+    const deployed = new Date().toLocaleString("zh-CN", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Asia/Shanghai",
+    })
     const links = opts?.links ?? []
     return (
       <footer class={`${displayClass ?? ""}`}>
         <p>
           {i18n(cfg.locale).components.footer.createdWith}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
+        </p>
+        <p class="deploy-time">
+          最近部署 {deployed}
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
