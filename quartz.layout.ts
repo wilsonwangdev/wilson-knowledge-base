@@ -29,7 +29,10 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.Backlinks(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    Component.PrevNext(),
+    Component.ConditionalRender({
+      component: Component.PrevNext(),
+      condition: (page) => page.fileData.slug?.startsWith("阅读列表/"),
+    }),
     Component.ConditionalRender({
       component: Component.Comments({
         provider: "giscus",
