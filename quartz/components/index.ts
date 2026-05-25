@@ -25,7 +25,7 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import PrevNext from "./PrevNext"
-import NewsletterSignup from "./NewsletterSignup"
+import PostSubscribe from "./PostSubscribe"
 
 export {
   ArticleTitle,
@@ -55,5 +55,5 @@ export {
   Flex,
   ConditionalRender,
   PrevNext,
-  NewsletterSignup,
+  PostSubscribe,
 }

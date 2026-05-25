@@ -51,16 +51,17 @@ export const sharedPageComponents: SharedLayout = {
       }),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    // Email subscription — homepage only
+    // Post-subscribe CTA — article pages only, above comments
     Component.ConditionalRender({
-      component: Component.NewsletterSignup(),
-      condition: (page) => page.fileData.slug === "index",
+      component: Component.PostSubscribe(),
+      condition: (page) => page.fileData.slug !== "index",
     }),
   ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/wilsonwangdev/wilson-knowledge-base",
       RSS: "/index.xml",
+      "📬 邮件订阅": "https://follow.it/wilson-s-knowledge-base?leanpub",
     },
   }),
 }
