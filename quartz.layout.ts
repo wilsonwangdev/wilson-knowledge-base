@@ -45,6 +45,8 @@ export const sharedPageComponents: SharedLayout = {
           lang: "zh-CN",
           reactionsEnabled: true,
           inputPosition: "bottom",
+          lightTheme: "light",
+          darkTheme: "transparent_dark",
         },
       }),
       condition: (page) => page.fileData.slug !== "index",
