@@ -25,7 +25,6 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import PrevNext from "./PrevNext"
-import PostSubscribe from "./PostSubscribe"
 import NewsletterFooter from "./NewsletterFooter"
 
 export {
@@ -56,6 +55,5 @@ export {
   Flex,
   ConditionalRender,
   PrevNext,
-  PostSubscribe,
   NewsletterFooter,
 }
