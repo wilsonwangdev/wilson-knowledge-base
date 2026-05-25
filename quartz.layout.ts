@@ -17,10 +17,10 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.RecentNotes({
-        title: "精选开源项目",
+        title: "仓库列表",
         limit: 10,
         filter: (f: any) =>
-          f.slug?.startsWith("精选开源项目/") && f.slug !== "精选开源项目",
+          f.slug?.startsWith("仓库列表/") && f.slug !== "仓库列表",
         showTags: false,
       }),
       condition: (page) => page.fileData.slug === "index",
@@ -90,7 +90,7 @@ export const defaultContentPageLayout: PageLayout = {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
         // Top-level folders: fixed order
-        const order = ["阅读列表", "精选开源项目"]
+        const order = ["阅读列表", "仓库列表"]
         if (a.isFolder && b.isFolder) {
           const aIdx = order.indexOf(a.displayName)
           const bIdx = order.indexOf(b.displayName)
