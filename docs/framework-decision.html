@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilson's Knowledge Base — 框架决策</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617; color: #e2e8f0; min-height: 100vh; padding: 2rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .doc-nav { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .doc-nav a {
+      color: #94a3b8; text-decoration: none; font-size: 0.8rem;
+      padding: 0.35rem 0.75rem; border-radius: 0.5rem; border: 1px solid #1e293b;
+      transition: all 0.2s;
+    }
+    .doc-nav a:hover { color: #e2e8f0; border-color: #475569; }
+    .doc-nav a.active { color: #22d3ee; border-color: #22d3ee; background: rgba(34, 211, 238, 0.1); }
+    .content { max-width: 800px; }
+    .content h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: #f8fafc; }
+    .content h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #cbd5e1; }
+    .content h3 { font-size: 1rem; font-weight: 500; margin: 1rem 0 0.5rem; color: #94a3b8; }
+    .content p { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin-bottom: 0.75rem; }
+    .content blockquote { border-left: 3px solid #334155; padding: 0.5rem 1rem; margin: 0.75rem 0; color: #64748b; font-style: italic; }
+    .content ul, .content ol { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin: 0.5rem 0 0.75rem 1.5rem; }
+    .content li { margin-bottom: 0.25rem; }
+    .content code { background: #1e293b; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.75rem; color: #fbbf24; }
+    .content pre { background: #0f172a; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 0.75rem 0; }
+    .content pre code { background: none; padding: 0; color: #e2e8f0; }
+    .content strong { color: #e2e8f0; }
+    .content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.75rem; }
+    .content th { text-align: left; padding: 0.5rem 0.75rem; background: #0f172a; color: #cbd5e1; font-weight: 600; border-bottom: 1px solid #1e293b; }
+    .content td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #0f172a; color: #94a3b8; }
+    .content tr:hover td { background: rgba(15, 23, 42, 0.5); }
+    .content a { color: #22d3ee; }
+    .footer { text-align: center; margin-top: 2rem; color: #475569; font-size: 0.7rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="doc-nav">
+      <a href="./">系统架构</a>
+      <a href="framework-decision.html" class="active">框架决策</a>
+      <a href="quartz-capability-analysis.html">能力分析</a>
+    </nav>
+    <div class="content">
+<h1>选型分析：Quartz vs 更换框架</h1>
+<blockquote>
+<p>分析时间：2026-05-23
+对比基准：Quartz 官网 (quartz.jzhao.xyz) vs 本站 (kb.wilsonhandbook.online)</p>
+</blockquote>
+<h2>现状对比</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Quartz 官网</th>
+<th>本站</th>
+<th>差异来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quartz 版本</td>
+<td>v4.5.2</td>
+<td>v4.5.2</td>
+<td>相同</td>
+</tr>
+<tr>
+<td>移动端 Explorer</td>
+<td>原生 absolute 覆盖层，无额外定制</td>
+<td>position:fixed drawer + backdrop-blur + 关闭按钮</td>
+<td><strong>custom.scss 重写</strong></td>
+</tr>
+<tr>
+<td>移动端 Header</td>
+<td>原生 flex row 布局</td>
+<td>重写了 sidebar.left 的 flex + padding</td>
+<td><strong>custom.scss 重写</strong></td>
+</tr>
+<tr>
+<td>汉堡按钮</td>
+<td>原生 24px 图标</td>
+<td>44x44 触摸目标 + 圆角 + active 态</td>
+<td><strong>custom.scss 重写</strong></td>
+</tr>
+<tr>
+<td>导航面板动画</td>
+<td>原生 transition</td>
+<td>cubic-bezier 缓动 + box-shadow</td>
+<td><strong>custom.scss 重写</strong></td>
+</tr>
+<tr>
+<td>toggleExplorer JS</td>
+<td>原生 Quartz</td>
+<td>注入了 backdrop + closeButton 管理逻辑</td>
+<td><strong>explorer.inline.ts 修改</strong></td>
+</tr>
+<tr>
+<td>侧边栏折叠</td>
+<td>无此功能</td>
+<td>SidebarCollapse 自定义组件</td>
+<td><strong>新增组件</strong></td>
+</tr>
+<tr>
+<td>桌面颜色主题</td>
+<td>Quartz 默认（紫/灰）</td>
+<td>自定义蓝色系</td>
+<td>quartz.config.ts</td>
+</tr>
+<tr>
+<td>字体</td>
+<td>Inter + 等宽</td>
+<td>Inter + JetBrains Mono（自托管）</td>
+<td>quartz.config.ts</td>
+</tr>
+</tbody>
+</table>
+<h2>核心发现</h2>
+<p><strong>Quartz 官网的 H5 体验好，是因为它没有自定义——用的就是框架原生行为。</strong></p>
+<p>本站的问题不是 Quartz 不行，而是 <strong>custom.scss 过度定制</strong>，在 230 行 CSS 中重写了整个移动端体验，导致：</p>
+<ol>
+<li><strong>与框架原生行为冲突</strong>——<code>position: fixed</code> vs <code>absolute</code>、自定义 backdrop vs 框架的 <code>lock-scroll</code></li>
+<li><strong>引入了额外复杂度</strong>——backdrop 元素需要 JS 管理生命周期、close 按钮需要手动插入</li>
+<li><strong>打破了 Quartz 的响应式约定</strong>——原生的 <code>flex: 0 0 34px</code> 改为 <code>auto</code>，改变了框架假设的尺寸</li>
+</ol>
+<h2>选型结论：<strong>继续使用 Quartz，不更换框架</strong></h2>
+<h3>理由</h3>
+<table>
+<thead>
+<tr>
+<th>评估维度</th>
+<th>Quartz</th>
+<th>替代方案</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>知识图谱</strong></td>
+<td>D3.js + PixiJS 原生支持</td>
+<td>Nextra/VitePress/Docusaurus 需要手动实现或插件</td>
+<td>Quartz 胜</td>
+</tr>
+<tr>
+<td><strong>Obsidian 兼容</strong></td>
+<td><code>[[wikilinks]]</code>、反向链接、图谱原生支持</td>
+<td>需要大量插件或自定义</td>
+<td>Quartz 胜</td>
+</tr>
+<tr>
+<td><strong>构建速度</strong></td>
+<td>~3s / 22 篇文章</td>
+<td>其他 SSG 类似</td>
+<td>持平</td>
+</tr>
+<tr>
+<td><strong>静态输出</strong></td>
+<td>纯 HTML，零运行时依赖</td>
+<td>Vercel 一键部署</td>
+<td>持平</td>
+</tr>
+<tr>
+<td><strong>H5 体验</strong></td>
+<td>原生可用，定制成本中等</td>
+<td>Nextra 等有更好的移动端支持</td>
+<td>略逊</td>
+</tr>
+<tr>
+<td><strong>社区/生态</strong></td>
+<td>活跃 (Discord, 2.7k stars)</td>
+<td>Nextra/VitePress 生态更大</td>
+<td>略逊</td>
+</tr>
+<tr>
+<td><strong>迁移成本</strong></td>
+<td>21 篇内容有 <code>[[wikilinks]]</code>、Obsidian 格式</td>
+<td>需要转换所有链接 + frontmatter</td>
+<td><strong>高</strong></td>
+</tr>
+<tr>
+<td><strong>个人品牌</strong></td>
+<td>Digital garden 定位明确</td>
+<td>变成普通文档站</td>
+<td>Quartz 更匹配</td>
+</tr>
+</tbody>
+</table>
+<p><strong>权衡：</strong> 知识图谱 + Obsidian 兼容性是 Quartz 的核心价值，H5 体验可以通过<strong>减少定制、回归原生</strong>来优化。更换框架会失去这两个核心能力，且迁移成本高。</p>
+<h2>优化计划：回归 Quartz 原生 + 最小化定制</h2>
+<h3>第一步：回退 custom.scss 移动端，恢复框架原生行为</h3>
+<p><strong>删除的代码：</strong>
+- <code>@media all and ($mobile)</code> 中的全部自定义（~150 行）
+  - 移除 <code>.sidebar.left</code> 布局重写
+  - 移除 <code>.explorer .mobile-explorer</code> 尺寸定制
+  - 移除 <code>.mobile-explorer-backdrop</code> 全部样式
+  - 移除 <code>.explorer:not(.collapsed) .explorer-content</code> 的 <code>position: fixed</code> 覆盖
+  - 移除 <code>.explorer.collapsed .explorer-content</code> 的 transform 覆盖
+  - 移除 <code>.mobile-nav-close</code> 全部样式
+  - 移除导航列表项间距定制
+  - 移除 <code>.explorer</code> 的 <code>flex: 0 0 auto</code> 覆盖</p>
+<p><strong>保留的代码：</strong>
+- <code>.graph { display: none !important }</code> — H5 隐藏图谱（合理）
+- <code>.page-title { display: none }</code> — H5 隐藏标题节省空间（合理）
+- <code>.center { padding: 0 1rem }</code> — 内容区呼吸边距（合理）
+- <code>.article-title</code> 字号调整 — 移动端阅读优化（合理）
+- <code>.breadcrumb-container</code> 字号调整（合理）
+- <code>overflow-x: hidden</code> — 防止横向滚动（合理）</p>
+<h3>第二步：回退 explorer.inline.ts，移除自定义 backdrop/close 逻辑</h3>
+<p><strong>删除：</strong>
+- <code>mobileBackdrop</code> / <code>ensureBackdrop()</code> / <code>openMobilePanel()</code> / <code>closeMobilePanel()</code>
+- <code>toggleExplorer</code> 中的 <code>isMobileToggle</code> 分支</p>
+<p><strong>保留：</strong>
+- <code>checkVisibility()</code> polyfill（兜底兼容）
+- <code>continue</code> bug fix</p>
+<h3>第三步：恢复主题色与 Quartz 官网一致</h3>
+<p><strong>修改 quartz.config.ts：</strong>
+- 将蓝色系 (<code>#2563eb</code> / <code>#60a5fa</code>) 改回 Quartz 默认紫/灰色系，或保持自主蓝色系（仅为视觉差异，不影响 H5 功能）</p>
+<h3>第四步：验证</h3>
+<ul>
+<li>本地构建 + 手机验证 H5 导航是否正常</li>
+<li>对比 Quartz 官网行为确认一致性</li>
+<li>确认桌面端 SidebarCollapse 仍正常工作</li>
+</ul>
+<h2>预期效果</h2>
+<table>
+<thead>
+<tr>
+<th>改进前</th>
+<th>改进后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>230 行自定义移动端 CSS</td>
+<td>~10 行保留必要调整</td>
+</tr>
+<tr>
+<td>自定义 JS backdrop/close 逻辑</td>
+<td>框架原生 toggle</td>
+</tr>
+<tr>
+<td>与 Quartz 行为不一致</td>
+<td>与 Quartz 官网行为一致</td>
+</tr>
+<tr>
+<td>维护成本高（每次升级可能冲突）</td>
+<td>维护成本低（框架自动处理）</td>
+</tr>
+<tr>
+<td>移动端面板有 backdrop + close ×</td>
+<td>简洁的原生覆盖层</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心原则：Let Quartz be Quartz。框架的移动端行为是经过验证的——不要重新发明它。</strong></p>
+    </div>
+    <p class="footer">Wilson's Knowledge Base · 开发文档 · Powered by GitHub Pages</p>
+  </div>
+</body>
+</html>

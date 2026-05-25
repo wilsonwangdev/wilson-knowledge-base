@@ -102,8 +102,8 @@ python3 -m http.server 8080 -d public
 ├── quartz.layout.ts          # 布局配置（三栏 Grid 定义、组件排列）
 ├── docs/                     # 开发文档 (GitHub Pages 独立站点)
 │   ├── index.html            #   系统架构图
-│   ├── framework-decision.md #   框架选型决策
-│   └── quartz-capability-analysis.md
+│   ├── framework-decision.html  # 框架选型决策
+│   └── quartz-capability-analysis.html  # 能力边界分析
 ├── .github/workflows/        # CI 流水线
 │   └── links.yml             #   Dead Link Checker
 ├── lychee.toml               # 死链接检查配置

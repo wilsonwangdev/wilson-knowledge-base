@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilson's Knowledge Base — 能力分析</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: #020617; color: #e2e8f0; min-height: 100vh; padding: 2rem;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .doc-nav { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .doc-nav a {
+      color: #94a3b8; text-decoration: none; font-size: 0.8rem;
+      padding: 0.35rem 0.75rem; border-radius: 0.5rem; border: 1px solid #1e293b;
+      transition: all 0.2s;
+    }
+    .doc-nav a:hover { color: #e2e8f0; border-color: #475569; }
+    .doc-nav a.active { color: #22d3ee; border-color: #22d3ee; background: rgba(34, 211, 238, 0.1); }
+    .content { max-width: 800px; }
+    .content h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: #f8fafc; }
+    .content h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: #cbd5e1; }
+    .content h3 { font-size: 1rem; font-weight: 500; margin: 1rem 0 0.5rem; color: #94a3b8; }
+    .content p { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin-bottom: 0.75rem; }
+    .content blockquote { border-left: 3px solid #334155; padding: 0.5rem 1rem; margin: 0.75rem 0; color: #64748b; font-style: italic; }
+    .content ul, .content ol { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; margin: 0.5rem 0 0.75rem 1.5rem; }
+    .content li { margin-bottom: 0.25rem; }
+    .content code { background: #1e293b; padding: 0.15rem 0.4rem; border-radius: 0.25rem; font-size: 0.75rem; color: #fbbf24; }
+    .content pre { background: #0f172a; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 0.75rem 0; }
+    .content pre code { background: none; padding: 0; color: #e2e8f0; }
+    .content strong { color: #e2e8f0; }
+    .content table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.75rem; }
+    .content th { text-align: left; padding: 0.5rem 0.75rem; background: #0f172a; color: #cbd5e1; font-weight: 600; border-bottom: 1px solid #1e293b; }
+    .content td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #0f172a; color: #94a3b8; }
+    .content tr:hover td { background: rgba(15, 23, 42, 0.5); }
+    .content a { color: #22d3ee; }
+    .footer { text-align: center; margin-top: 2rem; color: #475569; font-size: 0.7rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="doc-nav">
+      <a href="./">系统架构</a>
+      <a href="framework-decision.html">框架决策</a>
+      <a href="quartz-capability-analysis.html" class="active">能力分析</a>
+    </nav>
+    <div class="content">
+<h1>Quartz 能力边界分析</h1>
+<blockquote>
+<p>分析时间：2026-05-23
+版本：Quartz v4.5.2</p>
+</blockquote>
+<h2>框架定位</h2>
+<p>Quartz 是一个<strong>静态站点生成器</strong>，专为 Obsidian-style digital garden 设计。它的核心假设是：</p>
+<ol>
+<li>内容是 Markdown 文件，放在 <code>content/</code> 目录</li>
+<li>内容通过 Obsidian 风格的 <code>[[wikilinks]]</code> 相互关联</li>
+<li>输出是纯静态 HTML+CSS+JS，零服务端运行时</li>
+</ol>
+<p><strong>本质上是一个「编译型」系统</strong>——所有逻辑在构建时完成，浏览器端只有少量交互增强。</p>
+<hr />
+<h2>能力矩阵</h2>
+<h3>✅ Quartz 原生支持（无需修改框架）</h3>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>实现方式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Markdown → HTML</td>
+<td>remark/rehype 管道</td>
+<td>12 种 transformer 插件可用</td>
+</tr>
+<tr>
+<td>语法高亮</td>
+<td>Shiki (构建时)</td>
+<td>双主题 (light/dark)</td>
+</tr>
+<tr>
+<td>全文搜索</td>
+<td>FlexSearch (客户端)</td>
+<td>~2MB 搜索索引，在 postscript.js 中</td>
+</tr>
+<tr>
+<td>知识图谱</td>
+<td>D3.js + PixiJS</td>
+<td>Canvas/WebGL 渲染，桌面端默认</td>
+</tr>
+<tr>
+<td>暗色模式</td>
+<td>CSS 变量切换</td>
+<td><code>&lt;html saved-theme&gt;</code> 属性驱动</td>
+</tr>
+<tr>
+<td>阅读模式</td>
+<td>CSS opacity</td>
+<td>切换侧边栏透明度</td>
+</tr>
+<tr>
+<td>目录 (TOC)</td>
+<td>构建时生成</td>
+<td>右侧栏 sticky 导航</td>
+</tr>
+<tr>
+<td>反向链接</td>
+<td>构建时计算</td>
+<td>右侧栏 Backlinks 组件</td>
+</tr>
+<tr>
+<td>RSS / Sitemap</td>
+<td>构建时生成</td>
+<td>自动更新</td>
+</tr>
+<tr>
+<td>OG 图片</td>
+<td>Satori (构建时渲染)</td>
+<td>每篇文章独立社交预览图</td>
+</tr>
+<tr>
+<td>Popover 预览</td>
+<td>客户端 JS</td>
+<td>悬停 wikilink 弹出预览卡片</td>
+</tr>
+<tr>
+<td>SPA 导航</td>
+<td>micromorph</td>
+<td>页面间无刷新切换</td>
+</tr>
+<tr>
+<td>评论</td>
+<td>Giscus</td>
+<td>GitHub Discussions 集成</td>
+</tr>
+<tr>
+<td>数学公式</td>
+<td>KaTeX / MathJax</td>
+<td>构建时 + 客户端渲染</td>
+</tr>
+</tbody>
+</table>
+<h3>🟡 可定制（需修改 quartz 配置或 custom.scss）</h3>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>当前状态</th>
+<th>限制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布局排列</td>
+<td>三栏 Grid，通过 <code>quartz.layout.ts</code> 配置</td>
+<td>只能控制组件<strong>排列顺序</strong>，不能改变 Grid 结构本身（除非改 <code>base.scss</code>）</td>
+</tr>
+<tr>
+<td>侧边栏折叠</td>
+<td><strong>已实现</strong> (SidebarCollapse + custom.scss)</td>
+<td>通过修改 <code>grid-template-columns</code> 实现，不是真正的侧滑动画</td>
+</tr>
+<tr>
+<td>移动端响应式</td>
+<td><strong>已深度定制</strong> (custom.scss ~230 行)</td>
+<td>Quartz 原生的移动端体验很差——只是简单的 column stack</td>
+</tr>
+<tr>
+<td>Explorer 排序</td>
+<td>通过 sortFn 配置</td>
+<td>只能控制排序，不能改变渲染结构</td>
+</tr>
+<tr>
+<td>字体</td>
+<td>自托管 (local)</td>
+<td>需要手动将字体文件放到 <code>quartz/static/</code></td>
+</tr>
+<tr>
+<td>颜色主题</td>
+<td><code>quartz.config.ts</code> 中的 <code>theme</code></td>
+<td>有限的 CSS 变量覆盖——不是完整的主题系统</td>
+</tr>
+<tr>
+<td>国际化</td>
+<td>30 种 locale 文件</td>
+<td>字符串级别的 i18n，需要手动维护 <code>zh-CN.ts</code></td>
+</tr>
+</tbody>
+</table>
+<h3>🔴 Quartz 的硬限制（框架架构决定的）</h3>
+<table>
+<thead>
+<tr>
+<th>限制</th>
+<th>原因</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>无真正的客户端路由</strong></td>
+<td>micromorph 是 DOM 替换，不是 React Router 式 SPA</td>
+<td>无法在 JS 中访问路由状态、无法实现条件渲染</td>
+</tr>
+<tr>
+<td><strong>无状态管理</strong></td>
+<td>纯静态 HTML，无共享状态</td>
+<td>localStorage 是唯一持久化手段；组件间状态隔离</td>
+</tr>
+<tr>
+<td><strong>CSS 全局作用域</strong></td>
+<td>SCSS，无 CSS-in-JS/CSS Modules</td>
+<td>所有样式在全局命名空间，需小心特异性冲突</td>
+</tr>
+<tr>
+<td><strong>无组件间通信</strong></td>
+<td>TSX 组件在构建时渲染为静态 HTML</td>
+<td>组件间无法互相引用或传递数据——除了 DOM 事件</td>
+</tr>
+<tr>
+<td><strong>JS 体积大</strong></td>
+<td>postscript.js 724KB</td>
+<td>包含 D3 + PixiJS + FlexSearch + 所有 inline 脚本</td>
+</tr>
+<tr>
+<td><strong>构建时耦合</strong></td>
+<td>所有逻辑在 <code>npx quartz build</code> 时确定</td>
+<td>动态内容（如实时数据）完全不可能</td>
+</tr>
+<tr>
+<td><strong>无服务端能力</strong></td>
+<td>纯静态输出</td>
+<td>无 API 路由、无 serverless function、无中间件</td>
+</tr>
+<tr>
+<td><strong>Monorepo 不友好</strong></td>
+<td>强假设 content/ 是本地目录</td>
+<td>无法从外部数据源拉取内容（除非写自定义 emitter）</td>
+</tr>
+<tr>
+<td><strong>Extremely opinionated DOM</strong></td>
+<td>生成的 HTML 结构不可控</td>
+<td>无法自定义组件输出的 DOM 结构——只能通过 CSS 覆盖</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>当前踩到的框架限制</h2>
+<h3>1. 移动端 Navigation 体验</h3>
+<p><strong>问题：</strong> Quartz 原生的 mobile explorer 只是一个 <code>position: absolute</code> 的全屏覆盖层，无 backdrop、无动画、无关闭交互。</p>
+<p><strong>当前方案：</strong> 在 <code>custom.scss</code> 中用 ~230 行 CSS 重写了整个移动端体验——drawer 面板、backdrop-blur 遮罩、关闭按钮。在 <code>explorer.inline.ts</code> 中注入了 backdrop 管理和关闭逻辑。</p>
+<p><strong>仍然是 hack：</strong> 框架不提供「navigation drawer」作为一等概念，我们是通过覆盖 <code>.explorer:not(.collapsed) .explorer-content</code> 的 <code>position: absolute</code> → <code>position: fixed</code> 来实现的。这在 SPA 导航后需要手动管理 DOM 状态。</p>
+<h3>2. 侧边栏折叠 = Grid 列宽变化</h3>
+<p><strong>问题：</strong> 折叠侧边栏通过 <code>grid-template-columns: 0 1fr $sidePanelWidth</code> 实现。这不是「折叠」而是「删除列」——内容区域会突然左移，无平滑过渡。</p>
+<p><strong>当前方案：</strong> 添加了 <code>transition</code> 和 <code>padding-left</code> 补偿。但 <code>grid-template-columns</code> 的过渡在大多数浏览器中不平滑。</p>
+<p><strong>更好的方案（不可行）：</strong> 理想的侧边栏折叠应该是 <code>transform: translateX(-320px)</code> 让侧边栏滑出，同时内容区自然扩展。但 Quartz 的 grid 布局和 sticky 定位阻止了这种实现。</p>
+<h3>3. 组件无法互操作</h3>
+<p><strong>问题：</strong> <code>SidebarCollapse</code> 组件和 <code>ReaderMode</code> 组件独立工作，互不知晓。当两者同时激活时，UI 可能出现不一致。</p>
+<p><strong>当前方案：</strong> 无。——两个组件各自管理自己的 CSS class / attribute，没有协调机制。</p>
+<p><strong>影响：</strong> 未来如果要添加更多交互式组件（如键盘快捷键、手势），需要小心状态冲突。</p>
+<h3>4. 无原生触摸手势支持</h3>
+<p><strong>问题：</strong> Quartz 没有任何 swipe/gesture 处理。移动端 drawer 只能通过点击打开/关闭。</p>
+<p><strong>改进方向：</strong> 可以在 <code>explorer.inline.ts</code> 中添加 <code>touchstart</code>/<code>touchend</code> 事件处理 swipe-to-close。但需要小心和页面滚动冲突。</p>
+<h3>5. 性能：724KB JS Bundle</h3>
+<p><strong>问题：</strong> 即使只访问一篇文章，浏览器也需要加载完整的 724KB JS（包含 D3、PixiJS、FlexSearch）。</p>
+<p><strong>框架原因：</strong> Quartz 将所有 inline 脚本和依赖打包到一个 <code>postscript.js</code>。没有代码分割、没有懒加载。</p>
+<p><strong>改进方向：</strong> 理论上可以通过修改 <code>build.ts</code> 中的 esbuild 配置来做 code splitting，但框架没有提供这种 hook。</p>
+<hr />
+<h2>关于 H5 UX 的改进策略</h2>
+<p>基于以上分析：</p>
+<table>
+<thead>
+<tr>
+<th>可行的改进</th>
+<th>实现方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Swipe-to-close drawer</td>
+<td><code>explorer.inline.ts</code> 加 <code>touchstart</code>/<code>touchend</code> 监听</td>
+</tr>
+<tr>
+<td>更平滑的面板过渡</td>
+<td><code>custom.scss</code> 调整 cubic-bezier + transition duration</td>
+</tr>
+<tr>
+<td>暗色模式下面板颜色</td>
+<td><code>custom.scss</code> 用 <code>[saved-theme=dark]</code> 选择器</td>
+</tr>
+<tr>
+<td>键盘快捷键 (Esc 关闭)</td>
+<td><code>explorer.inline.ts</code> 加 <code>keydown</code> 监听</td>
+</tr>
+<tr>
+<td>Haptic 反馈</td>
+<td><code>navigator.vibrate</code> (需要用户手势触发)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>不可行或高成本的改进</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真正的 React/Vue 组件系统</td>
+<td>Quartz 是编译型 SSG，不是 CSR 框架</td>
+</tr>
+<tr>
+<td>侧边栏 slide-out 动画</td>
+<td>Grid 布局限制，需要改 <code>base.scss</code> 核心布局</td>
+</tr>
+<tr>
+<td>代码分割 / 按需加载</td>
+<td>esbuild 配置被框架封装，无 hook 点</td>
+</tr>
+<tr>
+<td>服务端渲染的动态内容</td>
+<td>无服务端运行时</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>结论</h2>
+<p>Quartz 是一个<strong>优秀的 digital garden 框架</strong>——对于以内容为中心、构建时确定的静态知识库，它的插件系统和 Markdown 处理能力很强。</p>
+<p>但在<strong>交互体验</strong>方面，它提供的只是一个「基线」——所有高级交互（drawer 面板、手势、过渡动画）都需要通过 CSS 覆盖和内联脚本手工实现，而且受限于框架的 DOM 结构和构建流程。</p>
+<p><strong>核心策略：拥抱 custom.scss + inline scripts，不要试图从框架层面突破。</strong></p>
+    </div>
+    <p class="footer">Wilson's Knowledge Base · 开发文档 · Powered by GitHub Pages</p>
+  </div>
+</body>
+</html>
