@@ -1,16 +1,17 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { classNames } from "../util/lang"
 import style from "./styles/newsletterFooter.scss"
+// @ts-ignore
+import script from "./scripts/newsletter.inline"
+
+const FOLLOW_IT_ACTION =
+  "https://api.follow.it/subscription-form/Y05WSVJBV1JDWVBUSnEwUEYxY1A2TnU2MlJsdDRsTVNEWXJUTDA2QkVyWG5qbFRFdHAvNGphZWxQM2p3VFFMdE15MEFKTU1pNURFdkpYRExCMU9JUVNBK2RTSnpXcDlJNUsrdU1Ec1VGd29jd2lCamlJZmg4ZXk0ZE5NM3hNOVV8Zm4yeDQwQUF4QmhyQnpKUmhZM1RCUmlFeHBRSXF1MkY2NlFKdC8yNElldz0=/8"
 
 export default (() => {
   const NewsletterFooter: QuartzComponent = ({ displayClass }: QuartzComponentProps) => {
     return (
       <div class={classNames(displayClass, "newsletter-footer")}>
-        <form
-          class="nl-form"
-          action="https://api.follow.it/subscription-form/Y05WSVJBV1JDWVBUSnEwUEYxY1A2TnU2MlJsdDRsTVNEWXJUTDA2QkVyWG5qbFRFdHAvNGphZWxQM2p3VFFMdE15MEFKTU1pNURFdkpYRExCMU9JUVNBK2RTSnpXcDlJNUsrdU1Ec1VGd29jd2lCamlJZmg4ZXk0ZE5NM3hNOVV8Zm4yeDQwQUF4QmhyQnpKUmhZM1RCUmlFeHBRSXF1MkY2NlFKdC8yNElldz0=/8"
-          method="post"
-        >
+        <form class="nl-form" action={FOLLOW_IT_ACTION} method="post">
           <span class="nl-label">📬 新文章通知</span>
           <input
             type="email"
@@ -19,12 +20,16 @@ export default (() => {
             placeholder="输入邮箱地址"
             class="nl-input"
           />
-          <button type="submit" class="nl-btn">订阅</button>
+          <button type="submit" class="nl-btn">
+            订阅
+          </button>
         </form>
+        <p class="nl-msg" style="display:none"></p>
       </div>
     )
   }
 
   NewsletterFooter.css = style
+  NewsletterFooter.afterDOMLoaded = script
   return NewsletterFooter
 }) satisfies QuartzComponentConstructor

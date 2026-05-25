@@ -53,4 +53,22 @@
   &:hover {
     opacity: 0.9;
   }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.nl-msg {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.nl-success {
+  color: #16a34a;
+}
+
+.nl-error {
+  color: #dc2626;
 }
