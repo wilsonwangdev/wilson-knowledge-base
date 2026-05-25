@@ -3,9 +3,11 @@
 
 // Reader mode: fade sidebars (space preserved) + hide media
 // Floating exit button injected by readermode script — no hover-reveal needed
+// Note: reader mode only works on true desktop (≥1200px) where the 3-column
+// grid has both sidebars. Tablet (800-1200px) already has graph below content
+// and adapting to full-width there creates layout issues.
 :root[reader-mode="on"] {
-  // Cover both tablet (800-1200px) and desktop (≥1200px) — sidebar exists on both
-  @media all and (min-width: 800px) {
+  @media all and ($desktop) {
     .sidebar.left,
     .sidebar.right {
       opacity: 0;
@@ -52,9 +54,10 @@
   }
 }
 
-// Hide exit button on mobile (reader mode is desktop-only)
-@media all and ($mobile) {
-  .readermode-exit {
+// Hide reader mode on mobile + tablet (desktop-only, ≥1200px)
+@media all and (max-width: 1200px) {
+  .readermode-exit,
+  .readermode {
     display: none;
   }
 }
@@ -100,11 +103,6 @@ a.internal.alias {
   // Graph: hide on mobile (canvas-based, unusable)
   .graph {
     display: none !important;
-  }
-
-  // ReaderMode: hides graph/TOC on desktop, but both are already hidden on mobile
-  .readermode {
-    display: none;
   }
 
   // Page title: hide to save header space
