@@ -24,9 +24,7 @@ export default ((opts?: Options) => {
         <p>
           {i18n(cfg.locale).components.footer.createdWith}{" "}
           <a href="https://quartz.jzhao.xyz/">Quartz v{version}</a> © {year}
-        </p>
-        <p class="deploy-time">
-          最近部署 {deployed}
+          <span class="deploy-time"> · 部署于 {deployed}</span>
         </p>
         <ul>
           {Object.entries(links).map(([text, link]) => (
