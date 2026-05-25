@@ -1,0 +1,165 @@
+// ===== follow.it form layout (from official embed) =====
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  margin-top: 30px !important;
+  padding: clamp(17px, 5%, 40px) clamp(17px, 7%, 50px) !important;
+  max-width: none !important;
+  border-radius: 6px !important;
+  box-shadow: 0 5px 25px rgba(34, 60, 47, 0.25) !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview,
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview * {
+  box-sizing: border-box !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading {
+  width: 100% !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-heading h5 {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field {
+  margin-top: 20px !important;
+  width: 100% !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-input-field input {
+  width: 100% !important;
+  height: 40px !important;
+  border-radius: 6px !important;
+  border: 2px solid #e9e8e8 !important;
+  outline: none !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button {
+  margin-top: 10px !important;
+  width: 100% !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button {
+  width: 100% !important;
+  height: 40px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  line-height: 0px !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .form-preview .preview-submit-button button:hover {
+  cursor: pointer !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line {
+  color: #231f20 !important;
+  font-family: "Montserrat" !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 25px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: flex !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 10px !important;
+}
+
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] .powered-by-line img {
+  margin-left: 10px !important;
+  height: 1.13em !important;
+  max-height: 1.13em !important;
+}
+
+// ===== Site theme overrides =====
+
+// Light mode defaults (matches site light theme)
+.followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] {
+  .form-preview {
+    background-color: #fafafa !important;    // --light
+    border: 1px solid #e5e7eb !important;    // --lightgray
+  }
+
+  .preview-heading h5 {
+    color: #374151 !important;               // --darkgray
+    font-family: "Inter", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+  }
+
+  .preview-input-field input {
+    background-color: #ffffff !important;
+    color: #111827 !important;               // --dark
+    font-family: "Inter", sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    border-color: #e5e7eb !important;        // --lightgray
+    text-align: left !important;
+    padding: 0 12px !important;
+
+    &::placeholder {
+      color: #9ca3af !important;              // --gray
+      opacity: 1 !important;
+    }
+  }
+
+  .preview-submit-button button {
+    background-color: #2563eb !important;    // --secondary
+    color: #ffffff !important;
+    font-family: "Inter", sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+
+    &:hover {
+      background-color: #1d4ed8 !important;
+    }
+  }
+
+  .powered-by-line {
+    color: #9ca3af !important;               // --gray
+    font-family: "Inter", sans-serif !important;
+    font-size: 12px !important;
+  }
+}
+
+// Dark mode overrides — match Slate color scheme
+[saved-theme="dark"] .followit--follow-form-container[attr-a][attr-b][attr-c][attr-d][attr-e][attr-f] {
+  .form-preview {
+    background-color: #1e293b !important;    // slate-800
+    border-color: #334155 !important;        // slate-700
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .preview-heading h5 {
+    color: #cbd5e1 !important;               // slate-300
+  }
+
+  .preview-input-field input {
+    background-color: #0f172a !important;    // slate-900
+    color: #f8fafc !important;               // slate-50
+    border-color: #475569 !important;        // slate-600
+
+    &::placeholder {
+      color: #64748b !important;              // slate-500
+    }
+  }
+
+  .preview-submit-button button {
+    background-color: #60a5fa !important;    // blue-400
+    color: #0f172a !important;               // slate-900
+
+    &:hover {
+      background-color: #3b82f6 !important;   // blue-500
+    }
+  }
+
+  .powered-by-line {
+    color: #64748b !important;               // slate-500
+  }
+}

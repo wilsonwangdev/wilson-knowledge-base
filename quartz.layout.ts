@@ -51,6 +51,11 @@ export const sharedPageComponents: SharedLayout = {
       }),
       condition: (page) => page.fileData.slug !== "index",
     }),
+    // Email subscription — homepage only
+    Component.ConditionalRender({
+      component: Component.NewsletterSignup(),
+      condition: (page) => page.fileData.slug === "index",
+    }),
   ],
   footer: Component.Footer({
     links: {
