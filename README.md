@@ -100,7 +100,10 @@ python3 -m http.server 8080 -d public
 │   └── util/                 #   工具函数
 ├── quartz.config.ts          # 主配置（站点名、语言、主题、插件）
 ├── quartz.layout.ts          # 布局配置（三栏 Grid 定义、组件排列）
-├── architecture.html         # 系统架构图（在浏览器中打开）
+├── docs/                     # 开发文档 (GitHub Pages 独立站点)
+│   ├── index.html            #   系统架构图
+│   ├── framework-decision.md #   框架选型决策
+│   └── quartz-capability-analysis.md
 ├── .github/workflows/        # CI 流水线
 │   └── links.yml             #   Dead Link Checker
 ├── lychee.toml               # 死链接检查配置
@@ -112,7 +115,7 @@ python3 -m http.server 8080 -d public
 
 ## 架构速览
 
-打开 [`architecture.html`](./architecture.html) 查看完整的系统架构图。
+查看 [开发文档站点](https://wilsonwangdev.github.io/wilson-knowledge-base/) 了解系统架构图、框架选型决策及能力分析。
 
 **核心数据流：**
 
