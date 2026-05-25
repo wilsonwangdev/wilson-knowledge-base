@@ -4,12 +4,7 @@ import styles from "./styles/rssLink.scss"
 function RSSLink({ cfg }: QuartzComponentProps) {
   const feedUrl = `https://${cfg.baseUrl}/index.xml`
   return (
-    <button
-      class="rss-link"
-      title="RSS 订阅"
-      aria-label="RSS 订阅"
-      onclick={`window.open('${feedUrl}','_blank')`}
-    >
+    <a href={feedUrl} target="_blank" class="rss-link" title="RSS 订阅" aria-label="RSS 订阅">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -25,7 +20,7 @@ function RSSLink({ cfg }: QuartzComponentProps) {
         <path d="M4 4a16 16 0 0 1 16 16" />
         <circle cx="5" cy="19" r="1" />
       </svg>
-    </button>
+    </a>
   )
 }
 

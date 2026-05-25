@@ -7,16 +7,17 @@
   width: 20px;
   height: 32px;
   margin: 0;
-  text-align: inherit;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 
   & svg {
-    position: absolute;
     width: 20px;
     height: 20px;
-    top: calc(50% - 10px);
     color: var(--darkgray);
-    transition: opacity 0.1s ease;
+    transition: color 0.1s ease;
   }
 
   &:hover svg {
