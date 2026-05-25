@@ -1,25 +1,25 @@
 @use "./base.scss";
 @use "./variables.scss" as *;
 
-// Reader mode: collapse both sidebars + hide media for distraction-free reading
+// Reader mode: fade sidebars (space preserved) + hide media
+// Sidebars use opacity so content doesn't shift, and hover reveals
+// the ReaderMode button so user can always exit
 :root[reader-mode="on"] {
   @media all and ($desktop) {
-    #quartz-body {
-      grid-template-columns: 0 1fr 0;
+    .sidebar.left,
+    .sidebar.right {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
 
-      .sidebar.left,
-      .sidebar.right {
-        width: 0;
-        min-width: 0;
-        padding: 0 !important;
-        overflow: hidden;
-        pointer-events: none;
-        transition: width 300ms ease, opacity 150ms ease;
+      &:hover {
+        opacity: 1;
+        pointer-events: auto;
       }
     }
   }
 
-  // Hide images / media / embeds in reader mode for distraction-free reading
+  // Hide images / media / embeds in reader mode
   .center {
     img, video, iframe, .mermaid {
       display: none;
