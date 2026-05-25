@@ -54,11 +54,19 @@ function generateSiteMap(cfg: GlobalConfiguration, idx: ContentIndexMap): string
 function generateRSSFeed(cfg: GlobalConfiguration, idx: ContentIndexMap, limit?: number): string {
   const base = cfg.baseUrl ?? ""
 
+  // Strip Quartz heading anchor SVGs from RSS HTML — they bloat emails and
+  // don't render in email clients
+  const cleanHtml = (html: string | undefined): string | undefined => {
+    if (!html) return html
+    // Remove <a role="anchor">...</a> (the heading permalink SVGs)
+    return html.replace(/<a\s+role="anchor"[^>]*>.*?<\/a>/g, "")
+  }
+
   const createURLEntry = (slug: SimpleSlug, content: ContentDetails): string => `<item>
     <title>${escapeHTML(content.title)}</title>
     <link>https://${joinSegments(base, encodeURI(slug))}</link>
     <guid>https://${joinSegments(base, encodeURI(slug))}</guid>
-    <description><![CDATA[ ${content.richContent ?? content.description} ]]></description>
+    <description><![CDATA[ ${cleanHtml(content.richContent) ?? content.description} ]]></description>
     <pubDate>${content.date?.toUTCString()}</pubDate>
   </item>`
 
