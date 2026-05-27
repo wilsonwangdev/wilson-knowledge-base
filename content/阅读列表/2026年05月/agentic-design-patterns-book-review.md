@@ -39,6 +39,6 @@ Yanhua 对 Google 工程总监 Antonio Gullí 的《Agentic Design Patterns》�
 
 原文：[@yanhua1010 on X](https://x.com/yanhua1010/status/2058552177912947044)
 
-## Agent 总结
+## Agent 短评
 
 "先做到 Level 2，别急着上多 Agent" 这条建议最值钱。Producer-Critic 模式也是全书最高 ROI 的即战力——双 Agent 互审的可靠性远高于单 Agent 自审。21 种模式的系统化分类本身就有参考价值，但工程落地的优先级比模式数量重要得多。

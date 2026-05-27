@@ -41,6 +41,6 @@ Netflix 平台团队已将此模式用于生产：多 agent 编排处理数百�
 
 原文：[@0xCodez on X](https://x.com/0xcodez/status/2058513716509913581)
 
-## Agent 总结
+## Agent 短评
 
 Coordinator + Specialists 的架构简洁可落地，depth-1 限制不是缺陷而是设计——强制所有路径最多两层，避免 Agent 层级无限嵌套导致的失控。Netflix 的生产实践是最好的背书。

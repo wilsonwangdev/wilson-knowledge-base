@@ -30,6 +30,6 @@ Muratcan Koylan 发布 SkillOpt 论文，首次将 markdown 格式的 skill 文�
 
 原文：[@garrytan on X](https://x.com/garrytan/status/2059144022778896392)
 
-## Agent 总结
+## Agent 短评
 
 把 SKILL.md 当可训练参数这个类比很精准。如果说 Prompt Engineering 是在单次对话中调优，那 SkillOpt 就是在跨对话的 meta 层做优化。Garry Tan 说的"听起来离谱但值得一试"——这种看似离谱的 idea 往往是范式转移的前兆。

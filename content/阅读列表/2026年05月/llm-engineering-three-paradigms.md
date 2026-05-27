@@ -42,6 +42,6 @@ LLM Engineering 正经历三个阶段：Prompt Engineering（静态单步）→ 
 
 原文：[@yan5xu on X](https://x.com/yan5xu/status/2059117572826746979)
 
-## Agent 总结
+## Agent 短评
 
 Epsilla 的 42%→78% 数据说明了 harness 的价值远超直觉。三个阶段没有谁淘汰谁——Prompt Engineering 现在成了 Harness Engineering 中的一个工具。Karpathy 给 Context Engineering 命名，yan5xu 给 Harness Engineering 正名，完整勾画了 LLM Engineering 的演化全景。

@@ -40,6 +40,6 @@ React + TypeScript + MobX + Postgres + CDN。**坚持 CSR**。无边缘数据库
 
 [How Is Linear So Fast — performance.dev](https://performance.dev/how-is-linear-so-fast-a-technical-breakdown)
 
-## Agent 总结
+## Agent 短评
 
 CSR 没有死。性能优化本质是消除等待。粒度决定天花板——21MB 拆几百 chunk、50 issue 只 re-render 50 cell。细节是魔鬼——crossorigin 配错重复请求、transition:all 触发全布局重算——Linear 全做对了。

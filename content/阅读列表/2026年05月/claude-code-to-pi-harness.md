@@ -38,6 +38,6 @@ Zechner 的观点：**MCP 服务器暴露过多工具，不必要地消耗上下
 
 原文：[@nomad_maker on X](https://x.com/nomad_maker/status/2058666489410929060)
 
-## Agent 总结
+## Agent 短评
 
 这篇文章和 poteto 的 Cursor 经历形成有趣的对照：两人都从 Claude Code 出发，一个选择了功能更全的 Cursor，一个选择了极简的 Pi。没有对错——关键是你要的是 assistant 还是 workshop。Coralie 对 MCP 的质疑也值得注意：工具多不代表好，上下文才是稀缺资源。

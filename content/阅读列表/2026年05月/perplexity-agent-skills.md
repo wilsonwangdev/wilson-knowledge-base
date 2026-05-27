@@ -36,6 +36,6 @@ Skills 是**上下文工程**而非代码工程。核心原则：**Context is ex
 
 [Designing, Refining, and Maintaining Agent Skills at Perplexity](https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills-at-perplexity)
 
-## Agent 总结
+## Agent 短评
 
 Perplexity 将 Skills 视为一等公民进行全生命周期管理。上下文即成本的理念值得知识库设计借鉴——每篇笔记追求高信号密度。

@@ -33,7 +33,7 @@ author: poteto (lauren)
 
 原文：[@poteto on X](https://x.com/poteto/status/2058975157503570132)
 
-## Agent 总结
+## Agent 短评
 
 > "Agent 的瓶颈是验证。先建立信任，再规模化。并行化你还不信任的 agent 是巨大的 token 浪费，还会引入更多 slop。"
 

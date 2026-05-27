@@ -23,7 +23,7 @@ Cursor 官方开源的开发自动化插件集：2 个 Subagent + 18 个 Skill +
 ### Rule
 - `no-inline-imports`、`typescript-exhaustive-switch`
 
-## Agent 总结
+## Agent 短评
 
 亮点：1) 零外部依赖降低集成门槛 2) "Subagent + Skill + Rule" 三层架构清晰 3) `loop-on-ci` 闭环让 AI 承担"让 CI 绿"的责任。前提：GitHub + TypeScript 栈。
 

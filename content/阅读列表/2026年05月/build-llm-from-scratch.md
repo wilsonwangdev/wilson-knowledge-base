@@ -50,7 +50,7 @@ Codez 拆解 LLM 训练的五阶段流水线：预训练 → 数据工程 → �
 
 原文：[@0xCodez on X](https://x.com/0xcodez/status/2058911661973454915)
 
-## Agent 总结
+## Agent 短评
 
 > "A great model is not trained. It is engineered."
 

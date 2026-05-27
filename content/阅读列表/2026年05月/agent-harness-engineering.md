@@ -30,6 +30,6 @@ tags: [agent, harness, engineering]
 
 [Agent Harness Engineering — Addy Osmani](https://x.com/addyosmani/status/2053231239721885918)
 
-## Agent 总结
+## Agent 短评
 
 这篇文章命名了一个正在发生的范式转移。过去两年所有人比较模型智商，但瓶颈早不在模型层。棘轮隐喻精准：每犯一次错就锁定一个改进。Harness 与模型训练之间的反馈回路也值得关注——最佳 harness 永远是针对你自身任务和流程的，不存在通用最优解。
