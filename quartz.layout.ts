@@ -26,6 +26,16 @@ export const sharedPageComponents: SharedLayout = {
       condition: (page) => page.fileData.slug === "index",
     }),
     Component.ConditionalRender({
+      component: Component.RecentNotes({
+        title: "书籍列表",
+        limit: 10,
+        filter: (f: any) =>
+          f.slug?.startsWith("书籍列表/") && f.slug !== "书籍列表",
+        showTags: false,
+      }),
+      condition: (page) => page.fileData.slug === "index",
+    }),
+    Component.ConditionalRender({
       component: Component.Backlinks(),
       condition: (page) => page.fileData.slug !== "index",
     }),
@@ -33,7 +43,8 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.PrevNext(),
       condition: (page) =>
         page.fileData.slug?.startsWith("阅读列表/") ||
-        page.fileData.slug?.startsWith("仓库列表/"),
+        page.fileData.slug?.startsWith("仓库列表/") ||
+        page.fileData.slug?.startsWith("书籍列表/"),
     }),
     Component.ConditionalRender({
       component: Component.Comments({
@@ -101,7 +112,7 @@ export const defaultContentPageLayout: PageLayout = {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
         // Top-level folders: fixed order
-        const order = ["阅读列表", "仓库列表"]
+        const order = ["阅读列表", "仓库列表", "书籍列表"]
         if (a.isFolder && b.isFolder) {
           const aIdx = order.indexOf(a.displayName)
           const bIdx = order.indexOf(b.displayName)
@@ -162,8 +173,15 @@ export const defaultListPageLayout: PageLayout = {
       sortFn: (a, b) => {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
-        // Both folders: reverse chronological (newest first)
+        // Top-level folders: fixed order
+        const order = ["阅读列表", "仓库列表", "书籍列表"]
         if (a.isFolder && b.isFolder) {
+          const aIdx = order.indexOf(a.displayName)
+          const bIdx = order.indexOf(b.displayName)
+          if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx
+          if (aIdx !== -1) return -1
+          if (bIdx !== -1) return 1
+          // Both folders: reverse chronological (newest first)
           return b.displayName.localeCompare(a.displayName, undefined, {
             numeric: true,
             sensitivity: "base",
