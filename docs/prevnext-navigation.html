@@ -14,7 +14,7 @@
 <div class="container">
   <div class="header">
     <div class="header-row"><div class="pulse-dot"></div><h1>上下篇导航（PrevNext）</h1></div>
-    <p class="subtitle">自定义组件 · 连续阅读体验 · 仅阅读列表生效</p>
+    <p class="subtitle">自定义组件 · 连续阅读体验 · 阅读列表与仓库列表分别独立生效</p>
   </div>
 
   <nav class="doc-nav">
@@ -55,7 +55,7 @@
         <!-- All Content -->
         <rect x="30" y="20" width="840" height="70" rx="8" fill="rgba(15,23,42,0.4)" stroke="#334155" stroke-width="1"/>
         <text x="450" y="45" fill="#64748b" font-size="10" font-weight="600" text-anchor="middle">allFiles（全站内容，按日期排序）</text>
-        <text x="450" y="62" fill="#475569" font-size="8" text-anchor="middle">全站页面按 frontmatter.date 排序 → 线性导航</text>
+        <text x="450" y="62" fill="#475569" font-size="8" text-anchor="middle">全站页面按 frontmatter.date 排序 → 再按当前页 section 过滤 → 线性导航</text>
 
         <!-- Reading List files -->
         <rect x="50" y="115" width="380" height="60" rx="6" fill="rgba(8,51,68,0.3)" stroke="#22d3ee" stroke-width="1.5"/>
@@ -64,13 +64,13 @@
 
         <!-- Repo List files -->
         <rect x="470" y="115" width="380" height="60" rx="6" fill="rgba(30,41,59,0.3)" stroke="#64748b" stroke-width="1"/>
-        <text x="660" y="138" fill="#64748b" font-size="11" font-weight="600" text-anchor="middle">仓库列表/（PrevNext 不渲染）</text>
-        <text x="660" y="156" fill="#475569" font-size="8" text-anchor="middle">仓库A    仓库B    仓库C    …</text>
+        <text x="660" y="138" fill="#64748b" font-size="11" font-weight="600" text-anchor="middle">仓库列表/（PrevNext 独立生效）</text>
+        <text x="660" y="156" fill="#475569" font-size="8" text-anchor="middle">仓库1  ←  →  仓库2  ←  →  仓库3  ←  →  …</text>
 
         <!-- ConditionalRender gate -->
         <rect x="240" y="210" width="420" height="50" rx="6" fill="rgba(251,191,36,0.12)" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,3"/>
-        <text x="450" y="235" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">ConditionalRender: slug?.startsWith("阅读列表/")</text>
-        <text x="450" y="252" fill="#94a3b8" font-size="8" text-anchor="middle">仅阅读列表文章触发 PrevNext 渲染，仓库列表默认隐藏</text>
+        <text x="450" y="235" fill="#fbbf24" font-size="10" font-weight="600" text-anchor="middle">ConditionalRender: slug?.startsWith("阅读列表/") || "仓库列表/"</text>
+        <text x="450" y="252" fill="#94a3b8" font-size="8" text-anchor="middle">两个板块分别独立渲染 PrevNext，section 过滤确保不跨板块</text>
 
         <!-- Arrows -->
         <line x1="240" y1="175" x2="300" y2="208" stroke="#22d3ee" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
@@ -96,24 +96,31 @@
     </table>
 
     <h3>核心排序逻辑</h3>
-    <pre><code>// PrevNext.tsx — 全站排序 + 定位当前页
+    <pre><code>// PrevNext.tsx — section 过滤 + 全站排序 + 定位当前页
+const sectionPrefix = fileData.slug?.split("/")[0]  // 提取顶层目录名
 const pages = allFiles
   .filter((f) =>
     f.dates &&                          // 必须有日期
     f.slug !== "index" &&               // 排除首页
-    !f.slug?.startsWith("tags/")        // 排除标签页
+    !f.slug?.startsWith("tags/") &&     // 排除标签页
+    f.slug?.startsWith(sectionPrefix + "/")  // 仅当前 section 的文件
   )
-  .sort(byDateAndAlphabetical(cfg))     // 按日期 + 字母排序
+  .sort(byDateAndAlphabetical(cfg))     // 按日期降序 + 字母排序
 
 const currentIndex = pages.findIndex((f) => f.slug === fileData.slug)
-const prev = pages[currentIndex - 1]   // 上一篇
-const next = pages[currentIndex + 1]   // 下一篇</code></pre>
+
+// 降序排列下，数组前一位置是更新的文章，后一位置是更老的。
+// 交换索引方向使：「上一篇」→ 更老的文章，「下一篇」→ 更新的文章
+const prev = pages[currentIndex + 1]   // 上一篇（更老）
+const next = pages[currentIndex - 1]   // 下一篇（更新）</code></pre>
 
     <h3>布局注册</h3>
     <pre><code>// quartz.layout.ts — afterBody 区
 Component.ConditionalRender({
   component: Component.PrevNext(),
-  condition: (page) => page.fileData.slug?.startsWith("阅读列表/"),
+  condition: (page) =>
+    page.fileData.slug?.startsWith("阅读列表/") ||
+    page.fileData.slug?.startsWith("仓库列表/"),
 }),</code></pre>
   </section>
 
@@ -123,7 +130,8 @@ Component.ConditionalRender({
       <tr><th>决策</th><th>选择</th><th>原因</th></tr>
       <tr><td>是否内置</td><td>自定义组件</td><td>Quartz v4 无此功能，参考博客框架体验补齐</td></tr>
       <tr><td>排序依据</td><td>按文章 frontmatter <code>date</code></td><td>与侧边栏 Explorer 的排序保持一致，反映笔记整理顺序</td></tr>
-      <tr><td>作用范围</td><td>仅阅读列表</td><td>仓库列表是工具索引，不属于连续阅读流</td></tr>
+      <tr><td>作用范围</td><td>阅读列表 + 仓库列表</td><td>两个板块分别独立——各自按日期排序，互不跨越</td></tr>
+      <tr><td>导航方向</td><td>上一篇指向更老，下一篇指向更新</td><td>降序排列下索引互换：prev = current+1（更老），next = current-1（更新）。符合列表最新在最前的直觉</td></tr>
       <tr><td>边界处理</td><td>首篇无「上一篇」，末篇无「下一篇」</td><td>自然终止，不循环，不跨板块</td></tr>
       <tr><td>移动端</td><td>标题截断（15 字），垂直堆叠</td><td>小屏空间有限，长标题会撑破布局</td></tr>
       <tr><td>首页/标签页</td><td>排除（<code>slug !== "index"</code>）</td><td>这些页面没有时间线概念</td></tr>
