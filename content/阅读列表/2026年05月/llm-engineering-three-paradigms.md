@@ -10,9 +10,7 @@ author: yan5xu
 
 LLM Engineering 正经历三个阶段：Prompt Engineering（静态单步）→ Context Engineering（程序化多步信息流）→ Harness Engineering（放手 + 护栏），每一层不消失，而是成为下一层的基础设施。作者用 Stripe、Anthropic、OpenAI Codex 三个案例验证了这一框架。
 
-## Agent 总结
-
-### 三个阶段的核心特征
+## 三个阶段的核心特征
 
 **Phase 1: Prompt Engineering — "对着🔮许愿的时代"**
 - 静态单步任务，人手动调优 prompt
@@ -27,30 +25,23 @@ LLM Engineering 正经历三个阶段：Prompt Engineering（静态单步）→ 
 **Phase 3: Harness Engineering — 放手 + 护栏**
 - 两步法：(a) **Let go** — 给 agent 工具自主获取反馈（lint、tests、代码搜索、浏览器状态）；(b) **Add guardrails** — 定义能力边界防失控（沙盒、CI 轮次限制、文件权限、架构约束）
 
-### 三个真实案例
+## 三个真实案例
 
 1. **Stripe Minions**：每周 1000+ agent 代写 PR，人类只 review。核心理念："Shift feedback left"——5 秒本地 lint 检查
 2. **Anthropic Claude Agent SDK**：克隆 claude.ai 过程中发现三种失败模式（一次做太多、过早完成、伪造测试），针对性加护栏
 3. **OpenAI Codex Team**：3-7 人团队，5 个月，1M 行代码，1500 个 PR。关键引用："Agents aren't hard; the Harness is hard"
 
-### 定量验证
+## 定量验证与演进
 
 - Epsilla 实验：仅改 harness 配置，任务成功率从 **42% → 78%**
 - LangChain Terminal Bench 2.0：同一模型在不同 harness 下，解决率差异超过 **60%**
 
-### 演进驱动力
-
-螺旋式上升：模型变强 → 人敢于委托更多 → 新可靠性问题浮现 → 新工程实践出现。每个阶段不消失，而是沉淀为下一层的基础设施。
-
-### 下一前沿
-
-**Eval**（如何评判 agent 输出质量）和 **Governance**（多 agent 认证、审计、权限控制）。
+演进驱动力是螺旋式上升：模型变强 → 人敢于委托更多 → 新可靠性问题浮现 → 新工程实践出现。每个阶段不消失，而是沉淀为下一层的基础设施。下一前沿：**Eval**（如何评判 agent 输出质量）和 **Governance**（多 agent 认证、审计、权限控制）。
 
 ## 来源
 
 原文：[@yan5xu on X](https://x.com/yan5xu/status/2059117572826746979)
 
-## 关联阅读
+## Agent 总结
 
-- [[agent-harness-engineering|Agent Harness Engineering]]
-- [[long-task-agent-engineering-loop|长任务 Agent 的最小工程闭环]]
+Epsilla 的 42%→78% 数据说明了 harness 的价值远超直觉。三个阶段没有谁淘汰谁——Prompt Engineering 现在成了 Harness Engineering 中的一个工具。Karpathy 给 Context Engineering 命名，yan5xu 给 Harness Engineering 正名，完整勾画了 LLM Engineering 的演化全景。
