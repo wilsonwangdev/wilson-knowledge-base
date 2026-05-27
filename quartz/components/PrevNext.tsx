@@ -27,8 +27,11 @@ export default (() => {
     // If not found (e.g., folder page or index), don't render
     if (currentIndex === -1) return null
 
-    const prev = currentIndex > 0 ? pages[currentIndex - 1] : null
-    const next = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null
+    // With descending sort (newest first), pages[currentIndex - 1] is NEWER
+    // and pages[currentIndex + 1] is OLDER. Swap so that:
+    //   "上一篇" (prev) → older article   "下一篇" (next) → newer article
+    const prev = currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null
+    const next = currentIndex > 0 ? pages[currentIndex - 1] : null
 
     // Don't render if at both ends (e.g., single article)
     if (!prev && !next) return null
