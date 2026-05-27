@@ -1,4 +1,5 @@
 import { Root as HTMLRoot } from "hast"
+import { Element } from "hast"
 import { toString } from "hast-util-to-string"
 import { QuartzTransformerPlugin } from "../types"
 import { escapeHTML } from "../../util/escape"
@@ -20,6 +21,29 @@ const urlRegex = new RegExp(
   "g",
 )
 
+// Check if a hast node is a heading element (h1-h6)
+function isHeading(node: any): node is Element {
+  return node.type === "element" && /^h[1-6]$/.test(node.tagName)
+}
+
+// Recursively filter out heading elements from the hast tree
+function stripHeadings(tree: HTMLRoot): HTMLRoot {
+  return {
+    ...tree,
+    children: tree.children
+      .filter((node) => !isHeading(node))
+      .map((node) => {
+        if (node.type === "element" && "children" in node) {
+          return {
+            ...node,
+            children: (node as any).children.filter((child: any) => !isHeading(child)),
+          }
+        }
+        return node
+      }),
+  }
+}
+
 export const Description: QuartzTransformerPlugin<Partial<Options>> = (userOpts) => {
   const opts = { ...defaultOptions, ...userOpts }
   return {
@@ -29,7 +53,9 @@ export const Description: QuartzTransformerPlugin<Partial<Options>> = (userOpts)
         () => {
           return async (tree: HTMLRoot, file) => {
             let frontMatterDescription = file.data.frontmatter?.description
-            let text = escapeHTML(toString(tree))
+            // Strip headings from the tree before converting to text,
+            // so og:description doesn't include markdown heading text like "一句话总结"
+            let text = escapeHTML(toString(stripHeadings(tree)))
 
             if (opts.replaceExternalLinks) {
               frontMatterDescription = frontMatterDescription?.replace(
@@ -46,9 +72,7 @@ export const Description: QuartzTransformerPlugin<Partial<Options>> = (userOpts)
             }
 
             // otherwise, use the text content
-            // Strip leading section heading prefixes (e.g., "一句话总结", "核心观点")
-            // that get included from markdown headings in the text extraction
-            const desc = text.replace(/^(一句话总结|核心观点|核心能力|技术栈|为什么关注|Agent 总结|Skills vs 传统软件)\s+/u, "")
+            const desc = text
             const sentences = desc.replace(/\s+/g, " ").split(/\.\s/)
             let finalDesc = ""
             let sentenceIdx = 0
