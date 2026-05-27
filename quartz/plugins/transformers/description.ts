@@ -46,7 +46,9 @@ export const Description: QuartzTransformerPlugin<Partial<Options>> = (userOpts)
             }
 
             // otherwise, use the text content
-            const desc = text
+            // Strip leading section heading prefixes (e.g., "一句话总结", "核心观点")
+            // that get included from markdown headings in the text extraction
+            const desc = text.replace(/^(一句话总结|核心观点|核心能力|技术栈|为什么关注|Agent 总结|Skills vs 传统软件)\s+/u, "")
             const sentences = desc.replace(/\s+/g, " ").split(/\.\s/)
             let finalDesc = ""
             let sentenceIdx = 0
