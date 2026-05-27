@@ -10,7 +10,7 @@ author: poteto (lauren)
 
 前 Meta 工程师 lauren（@poteto）讲述从自费 $200/月 Claude Code 重度用户到加入 Cursor 造 Agent Window 的经历，分享了 Cursor 在模型智能、压缩速度、GUI 独有功能上的优势，并开源了 pstack 技能插件和 Benny 自动化维护机器人。
 
-## 核心观点
+## Agent 总结
 
 ### 从 Claude Code 到 Cursor
 

@@ -10,7 +10,7 @@ author: yan5xu
 
 LLM Engineering 正经历三个阶段：Prompt Engineering（静态单步）→ Context Engineering（程序化多步信息流）→ Harness Engineering（放手 + 护栏），每一层不消失，而是成为下一层的基础设施。作者用 Stripe、Anthropic、OpenAI Codex 三个案例验证了这一框架。
 
-## 核心观点
+## Agent 总结
 
 ### 三个阶段的核心特征
 

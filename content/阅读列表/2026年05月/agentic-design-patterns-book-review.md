@@ -10,7 +10,7 @@ author: yanhua1010
 
 Yanhua 对 Google 工程总监 Antonio Gullí 的《Agentic Design Patterns》（Springer 2025，453页，21 种设计模式）的深度导读。核心贡献：Agent 四个等级的分类法、Producer-Critic 反思模式、三层记忆模型，以及三条可立即落地的实战建议。
 
-## 核心观点
+## Agent 总结
 
 ### Agent 四个等级
 

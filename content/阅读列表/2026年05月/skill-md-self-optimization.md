@@ -10,7 +10,7 @@ author: Garry Tan
 
 Garry Tan 转发 Muratcan Koylan 关于 SkillOpt 论文的推文，指出 Agent 的 SKILL.md 文件正在成为可训练参数——如同模型的梯度下降，agent skills 也可以被系统化优化。并使用 Hermes Agent / OpenClaw 中的 skillify 工具即可实现。
 
-## 核心观点
+## Agent 总结
 
 ### SkillOpt 论文的核心思路
 

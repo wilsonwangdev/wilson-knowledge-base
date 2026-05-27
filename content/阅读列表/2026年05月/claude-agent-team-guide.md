@@ -10,7 +10,7 @@ author: 0xCodez
 
 从单 Agent 到 20 个并行 Agent 团队的实战指南，结合 Anthropic 官方文档、cookbook 和 Netflix / Spiral by Every 生产实践，三阶段十步：决策设计 → 搭建团队 → 运行观察改进。
 
-## 核心观点
+## Agent 总结
 
 ### 第一阶段：决策与设计
 

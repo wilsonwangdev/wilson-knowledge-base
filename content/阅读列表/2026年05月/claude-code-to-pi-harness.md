@@ -10,7 +10,7 @@ author: nomad_maker (Coralie)
 
 Coralie 讲述了从 Sublime→VS Code→Copilot→Cursor→Claude Code→Pi 的编码工具进化史。核心发现：**最好的 coding agent 可能不是功能最多的，而是给你最大自主权的**。Pi 用极简 harness 哲学证明：简单替代复杂，上下文所有权比内置功能更关键。
 
-## 核心观点
+## Agent 总结
 
 ### Pi 是什么
 
