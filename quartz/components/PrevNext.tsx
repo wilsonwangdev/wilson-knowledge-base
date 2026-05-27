@@ -7,9 +7,18 @@ import style from "./styles/prevNext.scss"
 
 export default (() => {
   const PrevNext: QuartzComponent = ({ allFiles, fileData, displayClass, cfg }: QuartzComponentProps) => {
-    // Sort all content pages with dates, excluding index and folder pages
+    // Sort all content pages with dates, excluding index and folder pages.
+    // Filter to only include pages from the same top-level section (阅读列表, 仓库列表, etc.)
+    // to prevent PrevNext from crossing section boundaries.
+    const sectionPrefix = fileData.slug?.split("/")[0]
     const pages = allFiles
-      .filter((f) => f.dates && f.slug !== "index" && !f.slug?.startsWith("tags/"))
+      .filter(
+        (f) =>
+          f.dates &&
+          f.slug !== "index" &&
+          !f.slug?.startsWith("tags/") &&
+          f.slug?.startsWith(sectionPrefix + "/"),
+      )
       .sort(byDateAndAlphabetical(cfg))
 
     // Find current position in sorted list

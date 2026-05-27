@@ -31,7 +31,9 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.PrevNext(),
-      condition: (page) => page.fileData.slug?.startsWith("阅读列表/"),
+      condition: (page) =>
+        page.fileData.slug?.startsWith("阅读列表/") ||
+        page.fileData.slug?.startsWith("仓库列表/"),
     }),
     Component.ConditionalRender({
       component: Component.Comments({
