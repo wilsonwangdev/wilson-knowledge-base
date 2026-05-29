@@ -214,3 +214,63 @@ a.internal.alias {
   content: "关联阅读";
   font-size: 1rem;
 }
+
+// ===== Homepage entry cards =====
+// Cards follow Notion/Linear card philosophy:
+// whisper borders, layered shadows, typography-first, single accent on hover
+// .internal needed to beat Quartz's a.internal specificity (0,1,1 vs 0,2,0)
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+}
+
+a.home-card.internal {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 8px;
+  text-decoration: none !important;
+  background: var(--light);
+  background-color: var(--light);
+  transition: border-color 0.15s ease,
+              box-shadow 0.2s ease,
+              transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--secondary);
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+    background: var(--light);
+    background-color: var(--light);
+  }
+
+  .home-card-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .home-card-desc {
+    font-size: 0.82rem;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+}
+
+@media all and ($mobile) {
+  .home-cards {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0.75rem;
+  }
+
+  a.home-card.internal {
+    padding: 1.1rem 1.15rem;
+  }
+}

@@ -5,12 +5,23 @@ date: 2026-05-23
 
 不定期更新的阅读精选与开源项目发现，经 AI 辅助整理总结。
 
-## 浏览方式
-
-- 📖 **阅读列表**：文章按阅读时间排列，最新在最前
-- 📦 **仓库列表**：记录发现的有趣开源仓库
-- 🔍 **全文搜索**：导航栏搜索入口，关键词直达
-- 🔗 **双向链接**：笔记间通过链接相互关联，点开即达
-- 📱 **随处可读**：桌面和移动端自动适配
+<div class="home-cards">
+  <a href="/reading/" class="home-card">
+    <span class="home-card-label">📖 阅读列表</span>
+    <span class="home-card-desc">文章阅读笔记，按时间排列</span>
+  </a>
+  <a href="/repos/" class="home-card">
+    <span class="home-card-label">📦 仓库列表</span>
+    <span class="home-card-desc">有趣的开源项目发现</span>
+  </a>
+  <a href="/books/" class="home-card">
+    <span class="home-card-label">📚 书籍列表</span>
+    <span class="home-card-desc">读过、在读与值得推荐的书</span>
+  </a>
+  <a href="/resources/" class="home-card">
+    <span class="home-card-label">🧰 在线资源</span>
+    <span class="home-card-desc">实用工具与参考资源</span>
+  </a>
+</div>
 
 > 知识在流动中生长，这里不是终点，是思绪的中转站。

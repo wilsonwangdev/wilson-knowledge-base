@@ -8,41 +8,18 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [
     Component.ConditionalRender({
       component: Component.RecentNotes({
-        title: "阅读列表",
-        limit: 25,
+        title: "最近更新",
+        limit: 8,
         filter: (f: any) => {
           const s = f.slug as string;
-          if (!s?.startsWith("reading/")) return false;
-          const parts = s.split("/");
-          return parts.length >= 3 && parts[parts.length - 1] !== "index";
-        },
-        showTags: false,
-      }),
-      condition: (page) => page.fileData.slug === "index",
-    }),
-    Component.ConditionalRender({
-      component: Component.RecentNotes({
-        title: "仓库列表",
-        limit: 10,
-        filter: (f: any) => {
-          const s = f.slug as string;
-          if (!s?.startsWith("repos/")) return false;
-          const parts = s.split("/");
-          return parts.length >= 3 && parts[parts.length - 1] !== "index";
-        },
-        showTags: false,
-      }),
-      condition: (page) => page.fileData.slug === "index",
-    }),
-    Component.ConditionalRender({
-      component: Component.RecentNotes({
-        title: "书籍列表",
-        limit: 10,
-        filter: (f: any) => {
-          const s = f.slug as string;
-          if (!s?.startsWith("books/")) return false;
-          const parts = s.split("/");
-          return parts[parts.length - 1] !== "index";
+          const last = s?.split("/").pop();
+          if (last === "index") return false;
+          return (
+            s?.startsWith("reading/") ||
+            s?.startsWith("repos/") ||
+            s?.startsWith("books/") ||
+            s?.startsWith("resources/")
+          );
         },
         showTags: false,
       }),
@@ -121,6 +98,7 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
+      folderDefaultState: "collapsed",
       sortFn: (a, b) => {
         // Folders before files
         if (a.isFolder && !b.isFolder) return -1
@@ -184,6 +162,7 @@ export const defaultListPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer({
+      folderDefaultState: "collapsed",
       sortFn: (a, b) => {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
