@@ -215,6 +215,14 @@ a.internal.alias {
   font-size: 1rem;
 }
 
+// Homepage: remove the <hr> separator between content and "最近更新"
+body[data-slug="index"] hr {
+  display: none;
+}
+body[data-slug="index"] .page-footer {
+  margin-top: 0.5rem;
+}
+
 // ===== Homepage entry cards =====
 // Cards follow Notion/Linear card philosophy:
 // whisper borders, layered shadows, typography-first, single accent on hover
