@@ -10,7 +10,12 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.RecentNotes({
         title: "阅读列表",
         limit: 25,
-        filter: (f: any) => f.slug?.startsWith("阅读列表/"),
+        filter: (f: any) => {
+          const s = f.slug as string;
+          if (!s?.startsWith("reading/")) return false;
+          const parts = s.split("/");
+          return parts.length >= 3 && parts[parts.length - 1] !== "index";
+        },
         showTags: false,
       }),
       condition: (page) => page.fileData.slug === "index",
@@ -19,8 +24,12 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.RecentNotes({
         title: "仓库列表",
         limit: 10,
-        filter: (f: any) =>
-          f.slug?.startsWith("仓库列表/") && f.slug !== "仓库列表",
+        filter: (f: any) => {
+          const s = f.slug as string;
+          if (!s?.startsWith("repos/")) return false;
+          const parts = s.split("/");
+          return parts.length >= 3 && parts[parts.length - 1] !== "index";
+        },
         showTags: false,
       }),
       condition: (page) => page.fileData.slug === "index",
@@ -29,8 +38,12 @@ export const sharedPageComponents: SharedLayout = {
       component: Component.RecentNotes({
         title: "书籍列表",
         limit: 10,
-        filter: (f: any) =>
-          f.slug?.startsWith("书籍列表/") && f.slug !== "书籍列表",
+        filter: (f: any) => {
+          const s = f.slug as string;
+          if (!s?.startsWith("books/")) return false;
+          const parts = s.split("/");
+          return parts[parts.length - 1] !== "index";
+        },
         showTags: false,
       }),
       condition: (page) => page.fileData.slug === "index",
@@ -42,9 +55,10 @@ export const sharedPageComponents: SharedLayout = {
     Component.ConditionalRender({
       component: Component.PrevNext(),
       condition: (page) =>
-        page.fileData.slug?.startsWith("阅读列表/") ||
-        page.fileData.slug?.startsWith("仓库列表/") ||
-        page.fileData.slug?.startsWith("书籍列表/"),
+        page.fileData.slug?.startsWith("reading/") ||
+        page.fileData.slug?.startsWith("repos/") ||
+        page.fileData.slug?.startsWith("books/") ||
+        page.fileData.slug?.startsWith("resources/"),
     }),
     Component.ConditionalRender({
       component: Component.Comments({
@@ -112,7 +126,7 @@ export const defaultContentPageLayout: PageLayout = {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
         // Top-level folders: fixed order
-        const order = ["阅读列表", "仓库列表", "书籍列表"]
+        const order = ["阅读列表", "仓库列表", "书籍列表", "在线资源"]
         if (a.isFolder && b.isFolder) {
           const aIdx = order.indexOf(a.displayName)
           const bIdx = order.indexOf(b.displayName)
@@ -174,7 +188,7 @@ export const defaultListPageLayout: PageLayout = {
         if (a.isFolder && !b.isFolder) return -1
         if (!a.isFolder && b.isFolder) return 1
         // Top-level folders: fixed order
-        const order = ["阅读列表", "仓库列表", "书籍列表"]
+        const order = ["阅读列表", "仓库列表", "书籍列表", "在线资源"]
         if (a.isFolder && b.isFolder) {
           const aIdx = order.indexOf(a.displayName)
           const bIdx = order.indexOf(b.displayName)

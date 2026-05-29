@@ -30,7 +30,15 @@ const defaultOptions: Options = {
     return node
   },
   sortFn: (a, b) => {
-    // Sort order: folders first, then files. Sort folders and files alphabeticall
+    // Custom order for top-level sections
+    const sectionOrder = ["阅读列表", "仓库列表", "书籍列表", "在线资源"]
+    const aIdx = sectionOrder.indexOf(a.displayName)
+    const bIdx = sectionOrder.indexOf(b.displayName)
+    if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx
+    if (aIdx !== -1) return -1
+    if (bIdx !== -1) return 1
+
+    // Sort order: folders first, then files. Sort folders and files alphabetically
     if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
       // numeric: true: Whether numeric collation should be used, such that "1" < "2" < "10"
       // sensitivity: "base": Only strings that differ in base letters compare as unequal. Examples: a ≠ b, a = á, a = A

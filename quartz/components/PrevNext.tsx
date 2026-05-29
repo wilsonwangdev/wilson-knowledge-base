@@ -16,6 +16,7 @@ export default (() => {
         (f) =>
           f.dates &&
           f.slug !== "index" &&
+          !f.slug?.endsWith("/index") &&
           !f.slug?.startsWith("tags/") &&
           f.slug?.startsWith(sectionPrefix + "/"),
       )
