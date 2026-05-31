@@ -98,6 +98,17 @@ a.internal.alias {
   padding: 0;
 }
 
+// ===== CJK text rendering — override Quartz's global overflow-wrap: break-word =====
+// Chinese has no spaces between words, so break-word treats entire paragraphs
+// as one "word" and breaks at random character positions. Use CJK line-breaking instead.
+article {
+  p, li, blockquote, td, th {
+    word-break: normal;
+    overflow-wrap: normal;
+    line-break: normal;
+  }
+}
+
 // ===== Mobile / H5 — minimal overrides, let Quartz handle the rest =====
 @media all and ($mobile) {
   // Graph: hide on mobile (canvas-based, unusable)
