@@ -38,6 +38,10 @@ export const sharedPageComponents: SharedLayout = {
         page.fileData.slug?.startsWith("resources/"),
     }),
     Component.ConditionalRender({
+      component: Component.ShareButton(),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
+    Component.ConditionalRender({
       component: Component.Comments({
         provider: "giscus",
         options: {

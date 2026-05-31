@@ -144,9 +144,9 @@ article {
     display: none;
   }
 
-  // Content area: breathing room
+  // Content area: breathing room (reduced from 1rem → 0.6rem for wider CJK lines)
   .center {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
   }
 
   // Typography: smaller on mobile
@@ -167,11 +167,6 @@ article {
   .breadcrumb-container {
     font-size: 0.85rem;
     margin-bottom: 0.5rem;
-  }
-
-  // Content area: right-side breathing room for article titles
-  .center {
-    padding-right: 1.25rem;
   }
 
   // Prevent long headings from hugging the right edge
@@ -314,5 +309,59 @@ a.home-card.internal {
 
   a.home-card.internal {
     padding: 1.1rem 1.15rem;
+  }
+}
+
+// ===== Share button =====
+.share-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 1rem;
+  position: relative;
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-family: var(--bodyFont);
+  color: var(--darkgray);
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+
+  &:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.share-toast {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: var(--dark);
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, top 0.2s;
+  white-space: nowrap;
+
+  &.show {
+    opacity: 1;
+    top: -2.4rem;
   }
 }

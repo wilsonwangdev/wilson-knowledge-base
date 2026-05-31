@@ -26,6 +26,7 @@ import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 import PrevNext from "./PrevNext"
 import NewsletterFooter from "./NewsletterFooter"
+import ShareButton from "./ShareButton"
 
 export {
   ArticleTitle,
@@ -56,4 +57,5 @@ export {
   ConditionalRender,
   PrevNext,
   NewsletterFooter,
+  ShareButton,
 }
