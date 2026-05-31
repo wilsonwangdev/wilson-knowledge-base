@@ -14,7 +14,7 @@ Mike Piccolo 提出「Agent harness 不应该是一个框架，而是一组独�
 
 ## 正文
 
-Mike Piccolo（iii 创始人）在这篇 X Article 中阐述了一个激进但自洽的论点：**当前 Agent 框架的根本问题不是功能不够，而是把 10-12 个独立职责打包成一个不可拆分的 monolith。**
+Mike Piccolo（iii 创始人）在[这篇 X Article](https://x.com/mfpiccolo/status/2060069083878408689)中阐述了一个激进但自洽的论点：**当前 Agent 框架的根本问题不是功能不够，而是把 10-12 个独立职责打包成一个不可拆分的 monolith。**
 
 ### 框架之困
 
