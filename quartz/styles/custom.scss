@@ -368,8 +368,11 @@ a.home-card.internal {
 
 // ===== 404 page =====
 .not-found-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 2rem 0 1rem;
+  padding: 2rem 0 0;
 
   h1 {
     font-size: 4rem;
@@ -377,6 +380,36 @@ a.home-card.internal {
     color: var(--lightgray);
     margin: 0 0 0.5rem;
     line-height: 1;
+  }
+}
+
+// ===== 404 page: single-column layout (no sidebars) =====
+// The 404 page inherits defaultListPageLayout which has a left sidebar column.
+// Hiding sidebar content with display:none doesn't collapse the grid cell —
+// the center column is still pushed right. We override the grid to single-column.
+body[data-slug="404"] {
+  #quartz-body {
+    grid-template-areas: "grid-center" "grid-footer";
+    grid-template-columns: 1fr;
+
+    .sidebar.left,
+    .sidebar.right {
+      display: none;
+    }
+
+    .center {
+      max-width: 750px;
+      justify-self: center;
+      width: 100%;
+    }
+  }
+
+  .page-footer {
+    margin-top: 0.5rem;
+  }
+  footer {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -435,5 +468,44 @@ a.home-card.internal {
 
   &:hover {
     color: var(--tertiary);
+  }
+}
+
+// ===== Tablet (iPad): symmetric horizontal breathing room =====
+// On tablet, the left sidebar column (320px) creates substantial visual space
+// on the left, but the center content only has 1rem body padding on the right.
+// Add right padding to .center (which has box-sizing: border-box) to balance.
+// Do NOT add to footer — it lacks border-box and would overflow.
+@media all and ($tablet) {
+  .sidebar.left {
+    height: auto;
+    align-self: start;
+  }
+  .center {
+    padding-right: 2rem;
+  }
+}
+
+// ===== List/folder pages (slug contains /index): compact layout =====
+// These pages have no afterBody content so every pixel of vertical space counts.
+// Reduce the massive 6rem header margin, hide the pointless <hr>, and tighten
+// footer spacing so the page fits in one screen on iPad.
+body[data-slug*=index]:not([data-slug=index]) {
+  .sidebar.left {
+    height: auto !important;
+    align-self: start !important;
+  }
+  .page-header {
+    margin-top: 3rem;
+  }
+  hr {
+    display: none;
+  }
+  .page-footer {
+    margin-top: 0.5rem;
+  }
+  footer {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
