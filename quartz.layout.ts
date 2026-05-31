@@ -1,6 +1,14 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
+// Helper: true for content pages (articles), false for list pages (folder indexes)
+const isContentPage = (page: any) =>
+  (page.fileData.slug?.startsWith("reading/") ||
+    page.fileData.slug?.startsWith("repos/") ||
+    page.fileData.slug?.startsWith("books/") ||
+    page.fileData.slug?.startsWith("resources/")) &&
+  !page.fileData.slug?.endsWith("/index")
+
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
@@ -27,27 +35,15 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.Backlinks(),
-      condition: (page) =>
-        page.fileData.slug?.startsWith("reading/") ||
-        page.fileData.slug?.startsWith("repos/") ||
-        page.fileData.slug?.startsWith("books/") ||
-        page.fileData.slug?.startsWith("resources/"),
+      condition: (page) => isContentPage(page),
     }),
     Component.ConditionalRender({
       component: Component.PrevNext(),
-      condition: (page) =>
-        page.fileData.slug?.startsWith("reading/") ||
-        page.fileData.slug?.startsWith("repos/") ||
-        page.fileData.slug?.startsWith("books/") ||
-        page.fileData.slug?.startsWith("resources/"),
+      condition: (page) => isContentPage(page),
     }),
     Component.ConditionalRender({
       component: Component.ShareButton(),
-      condition: (page) =>
-        page.fileData.slug?.startsWith("reading/") ||
-        page.fileData.slug?.startsWith("repos/") ||
-        page.fileData.slug?.startsWith("books/") ||
-        page.fileData.slug?.startsWith("resources/"),
+      condition: (page) => isContentPage(page),
     }),
     Component.ConditionalRender({
       component: Component.Comments({
@@ -65,20 +61,12 @@ export const sharedPageComponents: SharedLayout = {
           darkTheme: "transparent_dark",
         },
       }),
-      condition: (page) =>
-        page.fileData.slug?.startsWith("reading/") ||
-        page.fileData.slug?.startsWith("repos/") ||
-        page.fileData.slug?.startsWith("books/") ||
-        page.fileData.slug?.startsWith("resources/"),
+      condition: (page) => isContentPage(page),
     }),
     // Newsletter signup — only on content pages
     Component.ConditionalRender({
       component: Component.NewsletterFooter(),
-      condition: (page) =>
-        page.fileData.slug?.startsWith("reading/") ||
-        page.fileData.slug?.startsWith("repos/") ||
-        page.fileData.slug?.startsWith("books/") ||
-        page.fileData.slug?.startsWith("resources/"),
+      condition: (page) => isContentPage(page),
     }),
   ],
   footer: Component.Footer({
