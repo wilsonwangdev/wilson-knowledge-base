@@ -9,6 +9,8 @@ max_cache_age = "7d"
 cache_exclude_status = "500.."
 
 timeout = 30
+# Mimic a real browser to avoid false 403/404 from bot-blocking sites
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 retry_wait_time = 5
 max_retries = 2
 accept = ["200..=204", "206", "429"]
@@ -22,6 +24,11 @@ exclude = [
   '^https?://openai\.com/',
   # Zhihu articles often require login — false positive
   '^https?://zhuanlan\.zhihu\.com/',
+  # Douban blocks automated link checkers with 404
+  '^https?://book\.douban\.com/',
+  '^https?://www\.douban\.com/',
+  # Legacy/archived pages that may be temporarily unavailable
+  '^https?://web\.archive\.org/',
 ]
 
 exclude_path = ["node_modules", "public", ".quartz-cache"]
