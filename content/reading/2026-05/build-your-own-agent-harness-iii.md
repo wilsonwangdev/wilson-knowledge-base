@@ -1,5 +1,5 @@
 ---
-title: "How to Build Your Own Agent Harness — iii 的工作者架构"
+title: "How to Build Your Own Agent Harness — iii 的 Worker 架构"
 date: 2026-05-30T11:00
 tags:
   - agent-engineering
@@ -10,7 +10,7 @@ tags:
 
 ## 一句话总结
 
-Mike Piccolo 提出「Agent harness 不应该是一个框架，而是一组独立可替换的工作者（worker）」——iii 引擎将 credential、policy、approval、budget、streaming 等 15 项职责分解为独立 worker，通过统一的 `iii.trigger()` 原语组合，使「自建 harness」从 fork 框架变成 swap worker。
+Mike Piccolo 提出「Agent harness 不应该是一个框架，而是一组独立可替换的 worker」——iii 引擎将 credential、policy、approval、budget、streaming 等 15 项职责分解为独立 worker，通过统一的 `iii.trigger()` 原语组合，使「自建 harness」从 fork 框架变成 swap worker。
 
 ## 正文
 
@@ -22,7 +22,7 @@ Mike Piccolo（iii 创始人）在这篇 X Article 中阐述了一个激进但�
 
 原因在于，一个生产级 agent harness 实际上要承担 15 项独立职责：凭证解析、模型目录、turn 状态机、Skill 服务、prompt 组装、token 流式传输、策略检查、审批门控、预算追踪、调用钩子、会话持久化、上下文压缩、事件广播、链路追踪——而框架把它们打包成一个版本一起交付。当你想换掉其中某一个（比如策略引擎），你换的是整个 harness。
 
-### iii 的方案：工作者架构
+### iii 的方案：Worker 架构
 
 iii 的赌注是：**每一个职责都应该是一个独立 worker**，通过 WebSocket 连接到共享引擎，通过统一的 `iii.trigger()` 原语互相调用。
 
