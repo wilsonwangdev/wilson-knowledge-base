@@ -27,7 +27,11 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.Backlinks(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) =>
+        page.fileData.slug?.startsWith("reading/") ||
+        page.fileData.slug?.startsWith("repos/") ||
+        page.fileData.slug?.startsWith("books/") ||
+        page.fileData.slug?.startsWith("resources/"),
     }),
     Component.ConditionalRender({
       component: Component.PrevNext(),
@@ -39,7 +43,11 @@ export const sharedPageComponents: SharedLayout = {
     }),
     Component.ConditionalRender({
       component: Component.ShareButton(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) =>
+        page.fileData.slug?.startsWith("reading/") ||
+        page.fileData.slug?.startsWith("repos/") ||
+        page.fileData.slug?.startsWith("books/") ||
+        page.fileData.slug?.startsWith("resources/"),
     }),
     Component.ConditionalRender({
       component: Component.Comments({
@@ -57,7 +65,11 @@ export const sharedPageComponents: SharedLayout = {
           darkTheme: "transparent_dark",
         },
       }),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) =>
+        page.fileData.slug?.startsWith("reading/") ||
+        page.fileData.slug?.startsWith("repos/") ||
+        page.fileData.slug?.startsWith("books/") ||
+        page.fileData.slug?.startsWith("resources/"),
     }),
     // Newsletter signup — all pages, sits above footer
     Component.NewsletterFooter(),
