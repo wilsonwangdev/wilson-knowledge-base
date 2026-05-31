@@ -71,8 +71,15 @@ export const sharedPageComponents: SharedLayout = {
         page.fileData.slug?.startsWith("books/") ||
         page.fileData.slug?.startsWith("resources/"),
     }),
-    // Newsletter signup — all pages, sits above footer
-    Component.NewsletterFooter(),
+    // Newsletter signup — only on content pages
+    Component.ConditionalRender({
+      component: Component.NewsletterFooter(),
+      condition: (page) =>
+        page.fileData.slug?.startsWith("reading/") ||
+        page.fileData.slug?.startsWith("repos/") ||
+        page.fileData.slug?.startsWith("books/") ||
+        page.fileData.slug?.startsWith("resources/"),
+    }),
   ],
   footer: Component.Footer({
     links: {
