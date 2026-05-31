@@ -38,4 +38,4 @@ aliases:
 
 ## Agent 短评
 
-这本书和《人月神话》形成互补：Brooks 讲软件工程的宏观困境，Ousterhout 讲每个工程师每天面对的设计选择。深模块的概念可以立刻应用到代码 review 和 Agent 生成代码的评估中——下次 Agent 产出一个类，问一句：这模块深吗？
+这本书和[[the-mythical-man-month|《人月神话》]]形成互补：Brooks 讲软件工程的宏观困境，Ousterhout 讲每个工程师每天面对的设计选择。深模块的概念可以立刻应用到代码 review 和 Agent 生成代码的评估中——下次 Agent 产出一个类，问一句：这模块深吗？
