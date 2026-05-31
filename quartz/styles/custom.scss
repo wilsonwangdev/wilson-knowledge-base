@@ -101,12 +101,22 @@ a.internal.alias {
 // ===== CJK text rendering — override Quartz's global overflow-wrap: break-word =====
 // Chinese has no spaces between words, so break-word treats entire paragraphs
 // as one "word" and breaks at random character positions. Use CJK line-breaking instead.
+// Also reset text-wrap:pretty → auto (pretty's multi-line algorithm can destabilize CJK breaks).
 article {
   p, li, blockquote, td, th,
   h1, h2, h3, h4, h5, h6 {
     word-break: normal;
     overflow-wrap: normal;
     line-break: normal;
+    text-wrap: auto;
+  }
+
+  // Nested paragraphs inside list items (Quartz renders <li><p>...</p></li>)
+  li p {
+    word-break: normal;
+    overflow-wrap: normal;
+    line-break: normal;
+    text-wrap: auto;
   }
 }
 
@@ -117,6 +127,7 @@ article {
       word-break: normal;
       overflow-wrap: normal;
       line-break: normal;
+      text-wrap: auto;
     }
   }
 }
