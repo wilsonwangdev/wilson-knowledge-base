@@ -102,10 +102,22 @@ a.internal.alias {
 // Chinese has no spaces between words, so break-word treats entire paragraphs
 // as one "word" and breaks at random character positions. Use CJK line-breaking instead.
 article {
-  p, li, blockquote, td, th {
+  p, li, blockquote, td, th,
+  h1, h2, h3, h4, h5, h6 {
     word-break: normal;
     overflow-wrap: normal;
     line-break: normal;
+  }
+}
+
+// Override Quartz's mobile heading break-word (max-width:800px)
+@media all and ($mobile) {
+  article {
+    h1, h2, h3, h4, h5, h6 {
+      word-break: normal;
+      overflow-wrap: normal;
+      line-break: normal;
+    }
   }
 }
 
