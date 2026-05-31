@@ -6,6 +6,8 @@ douban: https://book.douban.com/subject/26835090/
 author: John Sonmez
 aliases:
   - 书籍列表/软技能：代码之外的生存指南
+  - books/软技能
+  - books/软技能：代码之外的生存指南
 ---
 
 ## 一句话总结

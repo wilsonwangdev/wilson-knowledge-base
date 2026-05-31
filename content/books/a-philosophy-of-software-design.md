@@ -6,6 +6,7 @@ douban: https://book.douban.com/subject/33463742/
 author: John Ousterhout
 aliases:
   - 书籍列表/软件的设计哲学
+  - books/软件的设计哲学
 ---
 
 ## 一句话总结

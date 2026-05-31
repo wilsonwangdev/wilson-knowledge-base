@@ -6,6 +6,7 @@ douban: https://book.douban.com/subject/35876217/
 author: Eric Jorgenson（汇编），Naval Ravikant（原著思想）
 aliases:
   - 书籍列表/纳瓦尔宝典
+  - books/纳瓦尔宝典
 ---
 
 ## 一句话总结

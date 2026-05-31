@@ -6,6 +6,7 @@ douban: https://book.douban.com/subject/1102259/
 author: Frederick P. Brooks Jr.
 aliases:
   - 书籍列表/人月神话
+  - books/人月神话
 ---
 
 ## 一句话总结
