@@ -509,3 +509,10 @@ body[data-slug*=index]:not([data-slug=index]) {
     margin-bottom: 0.5rem;
   }
 }
+
+// ===== Global footer margin: reduce from Quartz default 4rem =====
+// The 4rem gap between footer and page bottom creates excessive whitespace.
+// Override globally; specific page-type overrides (404, list) take precedence.
+footer {
+  margin-bottom: 0.5rem;
+}
