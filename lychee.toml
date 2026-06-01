@@ -29,6 +29,8 @@ exclude = [
   '^https?://www\.douban\.com/',
   # Legacy/archived pages that may be temporarily unavailable
   '^https?://web\.archive\.org/',
+  # Substack blocks automated link checkers with 403
+  '^https?://.*\.substack\.com/',
 ]
 
 exclude_path = ["node_modules", "public", ".quartz-cache"]
