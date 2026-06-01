@@ -1,7 +1,9 @@
 ---
 title: "2026 年如何学习全栈开发（X Article by @amank1412）"
 date: 2026-02-15
-tags: [resource, fullstack, learning-path, web-development, career, 2026]
+tags: [fullstack, learning-path, web-development, career, 2026]
+aliases:
+  - 阅读列表/2026年02月/learn-fullstack-2026
 ---
 
 ## 一句话总结

@@ -1,7 +1,9 @@
 ---
 title: "Claude Code 完全教程（X 线程 by @eyad_khrais）"
-date: 2026-02-15
-tags: [resource, claude-code, ai-coding, tutorial, agentic-development, prompting]
+date: 2026-02-14
+tags: [claude-code, ai-coding, tutorial, agentic-development, prompting]
+aliases:
+  - 阅读列表/2026年02月/complete-claude-code-tutorial
 ---
 
 ## 一句话总结
