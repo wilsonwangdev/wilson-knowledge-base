@@ -74,7 +74,13 @@ export const PageList: QuartzComponent = ({ cfg, fileData, allFiles, limit, sort
           <li class="section-li">
             <div class="section">
               <p class="meta">
-                {page.dates && <Date date={getDate(cfg, page)!} locale={cfg.locale} />}
+                {/* Folder entries (month subfolders) don't need a date —
+                    the folder name itself conveys the temporal grouping.
+                    Skip the filesystem-derived date that CreatedModifiedDate
+                    injects for folder index.md files without frontmatter dates. */}
+                {!page.slug?.endsWith("/index") && page.dates && (
+                  <Date date={getDate(cfg, page)!} locale={cfg.locale} />
+                )}
               </p>
               <div class="desc">
                 <h3>

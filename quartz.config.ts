@@ -78,8 +78,23 @@ const config: QuartzConfig = {
       Plugin.ContentPage(),
       Plugin.FolderPage({
         sort: (a, b) => {
-          // During build, file data has dates.created (from CreatedModifiedDate)
-          // or frontmatter.date. At runtime (SPA), contentIndex has top-level date.
+          // Detect folder entries (month subfolders like "reading/2026-05/index").
+          // Folders: sort by title/display name (reverse chronological — newest month first).
+          // Files: sort by date (reverse chronological — newest article first).
+          const aSlug = (a as any).slug as string
+          const bSlug = (b as any).slug as string
+          const aIsFolder = aSlug?.endsWith("/index")
+          const bIsFolder = bSlug?.endsWith("/index")
+
+          if (aIsFolder && bIsFolder) {
+            const aName = (a as any).frontmatter?.title || ""
+            const bName = (b as any).frontmatter?.title || ""
+            return bName.localeCompare(aName, undefined, { numeric: true, sensitivity: "base" })
+          }
+          if (aIsFolder && !bIsFolder) return -1
+          if (!aIsFolder && bIsFolder) return 1
+
+          // Both files: sort by date (newest first)
           const getDate = (x: any): number => {
             if (x.dates?.created) return new Date(x.dates.created).getTime()
             if (x.date) return new Date(x.date).getTime()
