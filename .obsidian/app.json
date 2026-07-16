@@ -1,0 +1,13 @@
+{
+  "promptDelete": false,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "content",
+  "attachmentFolderPath": "assets",
+  "showUnsupportedFiles": false,
+  "userIgnoreFilters": [
+    "node_modules/",
+    "public/",
+    ".quartz-cache/",
+    "quartz/"
+  ]
+}
