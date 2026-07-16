@@ -1,0 +1,8 @@
+{
+  "port": 27123,
+  "insecurePort": 27124,
+  "enableMcap": true,
+  "enableNonce": true,
+  "generateNonce": true,
+  "nonce": ""
+}

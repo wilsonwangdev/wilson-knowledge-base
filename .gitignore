@@ -27,5 +27,6 @@ quartz-temp/
 # Obsidian (personal workspace state)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
-.obsidian/plugins/
+.obsidian/plugins/*
+!.obsidian/plugins/obsidian-local-rest-api/
 .obsidian/themes/
