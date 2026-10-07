@@ -4,7 +4,8 @@ import os
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 port = int(os.environ.get("PORT", 4180))
-root = os.path.expanduser("~/projects/wilson-knowledge-base/public")
+# Resolve relative to this script, so the repo can move (e.g. ~/projects -> ~/_repos).
+root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "public")
 
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
