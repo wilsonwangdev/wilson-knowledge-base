@@ -16,10 +16,17 @@ echo "→ Cache-busting with git hash $HASH ..."
 
 # Strip any existing ?v=... query string, then append the new one.
 # Matches both href=".../index.css" and href=".../index.css?v=oldhash"
-find "$PUBLIC_DIR" -name '*.html' -exec sed -i '' \
-  -e "s|\(index\.css\)?v=[^\"]*|\1|g" \
-  -e "s|href=\"\(.*\)index\.css\"|href=\"\1index.css?v=$HASH\"|g" \
-  {} \;
+# Portable in-place edit: BSD sed requires `sed -i ''` while GNU sed requires
+# `sed -i` (no argument), so instead write to a temp file and mv it over the
+# original. This works with both without gsed/perl and needs no new deps.
+find "$PUBLIC_DIR" -name '*.html' -print | while IFS= read -r file; do
+  tmp="$file.tmp.$$"
+  sed \
+    -e "s|\(index\.css\)?v=[^\"]*|\1|g" \
+    -e "s|href=\"\(.*\)index\.css\"|href=\"\1index.css?v=$HASH\"|g" \
+    "$file" > "$tmp"
+  mv -f "$tmp" "$file"
+done
 
 COUNT=$(grep -rl "index.css?v=$HASH" "$PUBLIC_DIR" --include='*.html' | wc -l | tr -d ' ')
 echo "✓ Updated $COUNT HTML files"

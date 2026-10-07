@@ -11,6 +11,14 @@ if (which.status !== 0) {
   process.exit(127);
 }
 
-const args = ["--config", "lychee.toml", ...process.argv.slice(2), "./content/**/*.md"];
+// Keep these flags in sync with .github/workflows/links.yml so local runs match CI.
+// --root-dir content is required to resolve root-relative links like /reading/.
+const args = [
+  "--config", "lychee.toml",
+  "--no-progress",
+  "--root-dir", "content",
+  ...process.argv.slice(2),
+  "./content/**/*.md",
+];
 const result = spawnSync("lychee", args, { stdio: "inherit" });
 process.exit(result.status ?? 1);
