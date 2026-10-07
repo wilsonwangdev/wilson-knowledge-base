@@ -1,0 +1,115 @@
+---
+title: "How to keep learning in the age of LLMs：LLM 时代如何不把「学习」外包出去"
+date: 2026-10-05T12:00
+tags: [learning, llm, deliberate-practice, socratic-method, spaced-practice, developer-productivity, ai-assisted-learning, metacognition]
+aliases:
+  - 阅读列表/2026年10月/how-to-keep-learning-in-the-age-of-llms
+---
+
+## 一句话总结
+
+一位开发者对「LLM 杀死了学习动机」的诊断与解法：**LLM 能 one-shot 解决问题，也就消灭了「犯错—纠正」这个真正的学习机制**；他的应对是把 LLM 从"答案机"降级为"导师"（只解释概念、只问问题、不给代码），用**预先写好的分阶段计划**（goal / steps / **done when** / **trap**）把"决定下一步"的意志力消耗降为零，用**可视化反馈**维持动力，最后用 **spaced practice**（短会话、跨天重复）让知识真正沉淀——结论是：LLM 让研究变便宜了，但人也变懒了，所以要**主动把"挣扎"重新加回流程**。
+
+## 核心观点
+
+**1. 问题诊断：LLM 消灭的不是工作，是「犯错的乐趣」**
+
+作者开篇就把矛头指向一个反直觉的损失：过去我们学框架、语言、模式的方式是**先做错，再从错误里取一堂课**——但"现在一切都太快了，我们不愿意花时间做错的事，尽管从长期看那样更有益"。他给出的机制判断是全篇的地基：
+
+> **"That struggle is how your brain actually learns new things."**
+
+值得注意的是他自己的定位——**他不是旁观者的批评，而是承认自己是患者**："坦白说，我自己也犯这个毛病。我过去大量苦练，但现在觉得没意义，因为 LLM 能直接给你任何想要的东西。"他是**卡在瓶颈上**（职业需要 + 兴趣需要）才被迫重新找方法，这使全文读起来是"自救记录"而非"说教"。
+
+**2. 解法一：把 LLM 当导师，而不是答案机（全篇最有价值的一条）**
+
+这是文章的转折点，来自一个具体动作：他读 Bitcask 论文后**决定自己实现、不借助 LLM**，中途卡住——但他没有让 LLM 替他写那一段，而是**让它把概念讲清楚，好让他自己写**。随即他意识到更一般的用法：
+
+> "I could just use the LLM to teach me stuff without it giving me all the answers."
+
+他随后发现了一个叫 **`socratic-code-mentor`** 的 skill，其设计正是不给答案、只问对的问题。文中给了一个简化例子——用户写了个求和循环得到 `NaN`：
+
+```
+const nums = [1, 2, 3];
+let sum = 0;
+for (let i = 0; i <= nums.length; i++) sum += nums[i];   // i 多跑了一步
+```
+
+**LLM 没有说"你的循环多跑了一步"**，而是问：`nums` 有几项？最后一项的索引是多少？你的循环里 `i` 会取哪些值？——他没有忘记这个 bug，因为**是被迫自己想通的**。作者补了一条理论支撑，引 *Make It Stick*：
+
+> "When you're asked to struggle with solving a problem before being shown how to solve it, the subsequent solution is better learned and more durably remembered."
+
+**还有一个社会性证据**：他的 CTO 对他也用同一套——当他问"我们为什么不按 X 做？"，CTO 反问"**你为什么觉得应该按 X 做？**"，一步步追问，直到他自己落到答案上。
+
+**3. 解法二：把不感兴趣的苦工外包出去，目的是保住动机**
+
+作者在此处划了一条容易被误解的界线。他举例：你想通过做一个 chat app 学东西，需要 server 和 client——**如果你只想练 server，为什么要为不感兴趣的 client 耗掉动机？** 于是让 LLM 去做测试、工具、可视化。
+
+他**主动澄清这不是说那些工作没用**："我不是说它们没价值。我只是说，如果它们提不起你的兴趣，就别自己硬扛。"**这条的实质是把"学习"从"完成项目"里解耦出来**——项目是载体，不是目标；让载体的摩擦降到最低，动机才不会提前耗尽。
+
+**4. 解法三：预生成计划对抗拖延——`PLAN.md` 的四段结构**
+
+他先描述失败模式：**非平凡项目不可能一夜完成**，所以如果你不事先规划，下一节你就会"对着空屏发呆 30 分钟"（他承认自己就是这样）。"我们会在没动力、没纪律的时候拖延。"
+
+解法的关键设计是让**恢复上下文这件事不需要意志力**：目标是"你坐下来，对 LLM 说'Let's continue'，它就把你从上次停下的地方接上"。他给每个 phase 定了**统一的四段结构**：
+
+1. **goal**——这一阶段要达成什么
+2. **small steps**——拆到足够小
+3. **"done when"**——**一个你真的能检查的完成条件**
+4. **trap**——**那个会咬你的坑**（提前标出预示的失败）
+
+**底部 checklist 就是"let's continue"的接口**——LLM 读它就知道你在哪。这条设计的收益被他说得很直白：**"这样你不必花任何意志力决定要做什么"**，而且"即使你很累，也能做一点点，然后算一次 quick win"。
+
+**5. 解法四：可视化反馈 + spaced practice（让动力和记忆都留得住）**
+
+**可视化**：他承认自己"有视觉反馈时享受得多"（半个 UI、一个 REPL 都行），因为它"逼我留在局里、对下一步保持好奇"。他给出 `tinylsm` 的实测 REPL 输出——看到自己写的 compaction 代码把读放大 100 倍（88 tables 174.9µs → 1 table 1.7µs），"老实说，这确实喂饱了我的动力"。
+
+**spaced practice**：他的工作方式天然产生它——**短会话、跨天跨周回到同一个项目**。他用铃木俊隆的意象收尾这一层："走过雾中，你不会注意到自己变湿，但你一点点湿透。"并补了心理学机制：**"会话之间的一点点遗忘，会迫使你的大脑把东西重新拉回来，而这份努力才是它记住的原因。"**（这是"提取练习"的通俗表述，也是全篇最接近认知科学的一段。）
+
+**6. 收尾建议：把目标定得超出你的 grasp**
+
+最后一条建议与直觉相反——**做有野心的项目**。理由是 LLM 改变了研究成本："以前实现一个 LSM-tree 意味着翻一堆 GitHub 仓库、读特定书里的特定章节；现在你只要说'我想搞懂 XYZ 怎么运作'。"**收益**：研究门槛下降；**代价**：他承认"我们变懒了"。他的对冲是两条：
+
+- **一致性 > 强度**："即使你每天只做 30 分钟，也比猛干两天、然后 10 天不见人要好。"
+- **不要满足于简单的东西**：可以对 LLM 说 100 次"我不懂"，它会再解释一遍。
+
+## 关键引用
+
+> "That struggle is how your brain actually learns new things."
+
+> "I could just use the LLM to teach me stuff without it giving me all the answers."
+
+> "When you're asked to struggle with solving a problem before being shown how to solve it, the subsequent solution is better learned and more durably remembered." —— *Make It Stick*
+
+> "It's like Zen master Shunryu Suzuki's image of walking through fog: you don't notice you're getting wet, but you get wet little by little."
+
+> "When you do something, you should burn yourself completely, like a good bonfire, leaving no trace of yourself." —— 铃木俊隆（全文收尾引用）
+
+## 来源
+
+- [How to keep learning in the age of LLMs — Oğuzhan Olguncu（2026-10-04）](https://www.ogzhanolguncu.com/blog/how-to-keep-learning-in-the-age-of-llms/)
+- 文中资源：[`socratic-code-mentor`（gist）](https://gist.github.com/ogzhanolguncu/274e9974dc02942109ad70200f6d7b25) · [`tinylsm`（GitHub）](https://github.com/ogzhanolguncu/tinylsm)
+
+## Agent 短评
+
+**体裁要诚实标注**：这是**个人经验分享（n=1），不是论证性文章**。它没有数据、没有实验、没有反例处理——**全部证据是作者自己的项目经历和一个 CTO 的轶事**。**读它不该带着"找结论"的期待，而该带着"找可复用的操作细节"的期待**。用这个尺度衡量，它的价值密度是合理的；用 `coding-is-not-solved` 那种论证密度去要求它，则完全不达标。
+
+**⭐ 真正可迁移的是三件操作级设计（这是它值得归档的理由）：**
+
+1. **`PLAN.md` 的 `trap` 栏**——**最有价值的一条**。"提前写出那个会咬你的坑"，本质上就是把**已知的失败模式前置到计划里**，而不是等它发生。这与知识库既有的 `loop-engineering` 经验**同源**：给外部 agent（Codex/Pi）派活时，"prompt 必须包含运行环境约束"之所以比"换个更强模型"有效得多，就是因为模型**猜不到目标环境的约束**——`trap` 栏是把这件事**从一次性 prompt 技巧升级成计划结构的固定一栏**。
+2. **`done when` 必须"你真的能检查"**——这与我们派活纪律里的"**输出不是完成信号**"是同一根神经的两端：一端是"别把 agent 的自报当完成"（验证端），另一端是"先定义可检查的完成条件"（设计端）。**后者其实是前者的前提**——如果你没写下 `done when`，你事后也就无从验证。
+3. **`socratic-code-mentor` 的约束方向**——**不给答案、只问问题**。它和"不采信 agent 自报"**形式相似但目的不同**：后者是**验证**（防止被虚假完成骗到），前者是**学习**（防止被现成答案骗到）。**同一个反-讨好机制，用在两个场景**——这个对应关系本身就是个值得记下的观察。
+
+**需要打折的部分：**
+
+- **观点新颖度低**。socratic method、spaced practice、visual feedback 都不是新概念——**spaced practice 有成熟的认知科学文献（间隔重复、提取练习），作者引的《Make It Stick》就是那类畅销科普**。本文的贡献是**把已知原理落成一套具体的、可抄的工作流**，不是提出新原理。
+- **"让 LLM 干无聊的活"有一个作者没处理的 trade-off**：外包得越多，你越可能**失去那些能力**（他举的例子是测试/工具/可视化，还算安全，但边界在哪他没讨论）。他在第 6 段承认"我们变懒了"，但停在了**道德提醒**，没有给出**判断标准**（什么可以外包、什么必须自己做）。
+- **全文隐含假设"学习 = 编程"**（作者自己承认"我主要谈编程"）。**是否可迁移到非编程领域，文中没有证据**——对需要大量记忆/事实性知识的领域（语言、法律、医学），"苏格拉底式追问"未必是最优路径。
+
+**⭐ 与知识库其他条目的关系（这是它放进来最大的增量）：**
+
+- **与 `coding-is-not-solved`（2026-09）构成一组对照**。两者**都反对"one-shot 文化"**，但姿态完全相反：那篇是**论战性的外部批评**（质疑"coding is solved"叙事，从成本结构、问责制、确定性三个硬论证出发）；本篇是**接受 LLM 前提下的内部适应**（不谈该不该用，只谈怎么用才不废掉自己）。**并置阅读的价值**：一篇回答"为什么不能全交给 AI"，一篇回答"既然交给了一部分，怎么保住我自己的脑子"——**这是同一个焦虑的防守面与进攻面**。
+- **与 `loop-engineering` 的实操呼应**：如第 1 条所述，`trap` 栏与"给 agent 的 prompt 必须包含环境事实"是同一个洞察的两种形式。**这条对照是双向的**：本文给我们的派活实践提供了一个更结构化的容器（计划模板），我们的派活实践给本文的方法提供了非编程场景的验证。
+
+**怎么读**：不要把它当"学习方法论综述"（覆盖不全），也不要当"LLM 使用技巧"（那些是手段不是主旨）。**它是一份"如何对抗外包自己"的操作清单**，最值得取用的是**三条**：① 卡住时，要 LLM 解释概念而非给代码；② 计划里固定加一栏 `trap`（预示会咬你的坑）；③ 完成条件必须写成**你亲自能检查**的 `done when`——**这三条都不依赖你信不信作者的哲学，抄了就能用。**
+
+**时效性提示**：文章发布于 2026-10-04，**涉及的具体工具会过时**（`socratic-code-mentor` 的 gist 链接、Bitcask/LSM-tree 的实现细节、`tinylsm` 项目状态）。**但四个方法的结构不会过时**——它们本质上是"如何在自己和现成答案之间保留一段距离"的通用技巧。
