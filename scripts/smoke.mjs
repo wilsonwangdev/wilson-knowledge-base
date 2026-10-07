@@ -54,12 +54,9 @@ function fetch(path) {
 }
 
 // Single-threaded dev servers (serve.py / python3 -m http.server) drop
-// connections when hammered with every request at once, so keep a small
-// number of requests in flight and slot results back by index.
-// Empirically tuned 2026-10-07 against serve.py: 4 passes 125/125 (3/3 runs);
-// 8 yields ~55 ECONNRESET; unbounded yields ~119. Do not raise without retesting.
-const CONCURRENCY = 4;
-
+// connections (ECONNRESET) when hit with many simultaneous requests, so the
+// checks run sequentially. All 125 pages take ~120ms this way — concurrency is
+// not worth the fragility. Do not parallelise without retesting against serve.py.
 async function check(path) {
   try {
     const res = await fetch(path);
@@ -69,15 +66,10 @@ async function check(path) {
   }
 }
 
-const results = new Array(checks.length);
-let next = 0;
-async function worker() {
-  while (next < checks.length) {
-    const i = next++;
-    results[i] = await check(checks[i]);
-  }
+const results = [];
+for (const path of checks) {
+  results.push(await check(path));
 }
-await Promise.all(Array.from({ length: Math.min(CONCURRENCY, checks.length) }, worker));
 
 let failed = 0;
 for (const r of results) {
