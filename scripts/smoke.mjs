@@ -1,18 +1,43 @@
 #!/usr/bin/env node
-// Smoke test: verify built site pages return 200 + contain expected content.
+// Smoke test: verify every content page is served with HTTP 200.
 // Requires `npm run serve` (or python3 -m http.server on public/) running.
+// Usage: node scripts/smoke.mjs         # verify all discovered pages
+//        node scripts/smoke.mjs --list  # print discovered paths, no HTTP requests
+import { readdirSync } from "node:fs";
+import { join, relative, sep } from "node:path";
 import { request } from "node:http";
 
 const PORT = process.env.PORT ?? "4180";
-const HOST = "127.0.0.1";
+const HOST = process.env.HOST ?? "127.0.0.1";
+const CONTENT_DIR = "content";
 
-const checks = [
-  { path: "/", expect: ["知识花园", "最近更新"] },
-  { path: "/2026/05/agentic-infrastructure", expect: ["Agentic Infrastructure", "Vercel"] },
-  { path: "/2026/05/comprehension-debt", expect: ["Comprehension Debt", "AI 生成"] },
-  { path: "/2026/05/jj-agent-version-control", expect: ["Agent 时代", "版本控制"] },
-  { path: "/2026/05/pi-design-art", expect: ["pi 的设计艺术", "Coding Agent"] },
-];
+// Map markdown files under content/ to their built URL paths:
+//   content/index.md            -> "/"
+//   content/<dir>/index.md      -> "/<dir>/"
+//   content/<dir>/<name>.md     -> "/<dir>/<name>"
+// Nested folders are handled by the same rule (e.g. reading/2026-10).
+function discoverPages(dir = CONTENT_DIR) {
+  const pages = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const full = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      pages.push(...discoverPages(full));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      const slug = relative(CONTENT_DIR, full).split(sep).join("/").slice(0, -3);
+      if (slug === "index") pages.push("/");
+      else if (slug.endsWith("/index")) pages.push(`/${slug.slice(0, -"index".length)}`);
+      else pages.push(`/${slug}`);
+    }
+  }
+  return pages;
+}
+
+const checks = [...new Set(discoverPages())].sort();
+
+if (process.argv.includes("--list")) {
+  for (const path of checks) console.log(path);
+  process.exit(0);
+}
 
 function fetch(path) {
   return new Promise((resolve, reject) => {
@@ -28,25 +53,38 @@ function fetch(path) {
   });
 }
 
-const results = await Promise.all(
-  checks.map(async (check) => {
-    try {
-      const res = await fetch(check.path);
-      const missing = check.expect.filter((s) => !res.body.includes(s));
-      const ok = res.status === 200 && missing.length === 0;
-      return { path: check.path, status: res.status, ok, missing };
-    } catch (err) {
-      return { path: check.path, status: 0, ok: false, error: err instanceof Error ? err.message : String(err) };
-    }
-  }),
-);
+// Single-threaded dev servers (serve.py / python3 -m http.server) drop
+// connections when hammered with every request at once, so keep a small
+// number of requests in flight and slot results back by index.
+// Empirically tuned 2026-10-07 against serve.py: 4 passes 125/125 (3/3 runs);
+// 8 yields ~55 ECONNRESET; unbounded yields ~119. Do not raise without retesting.
+const CONCURRENCY = 4;
+
+async function check(path) {
+  try {
+    const res = await fetch(path);
+    return { path, status: res.status, ok: res.status === 200 };
+  } catch (err) {
+    return { path, status: 0, ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+const results = new Array(checks.length);
+let next = 0;
+async function worker() {
+  while (next < checks.length) {
+    const i = next++;
+    results[i] = await check(checks[i]);
+  }
+}
+await Promise.all(Array.from({ length: Math.min(CONCURRENCY, checks.length) }, worker));
 
 let failed = 0;
 for (const r of results) {
   if (r.ok) console.log(`  ok  ${r.path}  [${r.status}]`);
   else {
     failed++;
-    console.log(`FAIL  ${r.path}  [${r.status}]  ${r.error ? `error: ${r.error}` : `missing: ${(r.missing ?? []).join(", ")}`}`);
+    console.log(`FAIL  ${r.path}  [${r.status}]${r.error ? `  error: ${r.error}` : ""}`);
   }
 }
 if (failed > 0) { console.log(`\n${failed}/${results.length} smoke checks failed`); process.exit(1); }
